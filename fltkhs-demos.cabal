@@ -2,7 +2,7 @@ name: fltkhs-demos
 version: 0.0.0.1
 synopsis: Extended FLTK demos
 description:
-  Extened FLTKHS demos moved to a separate package to keep the core package free of additional dependencies.
+  Extended FLTKHS demos moved to a separate package to keep the core package free of additional dependencies.
 license: MIT
 license-file: LICENSE
 author: Aditya Siram
