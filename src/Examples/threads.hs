@@ -9,24 +9,23 @@
 module Main where
 
 import qualified Graphics.UI.FLTK.LowLevel.FL as FL
-import Graphics.UI.FLTK.LowLevel.Fl_Enumerations
 import Graphics.UI.FLTK.LowLevel.Fl_Types
 import Graphics.UI.FLTK.LowLevel.FLTKHS
 
 import Control.Concurrent
 import Control.Concurrent.STM
-import Control.Concurrent.STM.TChan
 import Control.Exception (evaluate)
 import Control.Monad
 import Data.IORef
 
+main :: IO ()
 main = do
   -- Set up the window and widgets.
   w <- windowNew (Size (Width 260) (Height 110)) Nothing Nothing
   startButton <- buttonNew (Rectangle (Position (X 15) (Y 10)) (Size (Width 230) (Height 25))) (Just "start background thread")
-  b <- inputNew (Just FlNormalOutput) (Rectangle (Position (X 135) (Y 40)) (Size (Width 110) (Height 25))) (Just "primes ")
+  b <- outputNew (Rectangle (Position (X 135) (Y 40)) (Size (Width 110) (Height 25))) (Just "primes ") (Just FlNormalOutput)
   button <- buttonNew (Rectangle (Position (X 15) (Y 75)) (Size (Width 110) (Height 25))) (Just "increment")
-  counter <- inputNew (Just FlNormalOutput) (Rectangle (Position (X 135) (Y 75)) (Size (Width 110) (Height 25))) Nothing
+  counter <- outputNew (Rectangle (Position (X 135) (Y 75)) (Size (Width 110) (Height 25)))  Nothing (Just FlNormalOutput)
   clearVisibleFocus b
   clearVisibleFocus counter
 
@@ -40,7 +39,7 @@ main = do
 
   -- Start the click counter at zero.
   counterRef <- newIORef (0 :: Integer)
-  setValue counter (show 0) Nothing
+  _ <- setValue counter (show (0 :: Integer)) Nothing
 
   -- When the button is pressed, increment the counter and update the
   -- label.
@@ -54,12 +53,13 @@ main = do
 
   -- Start the UI.
   showWidget w
-  FL.run
+  _ <- FL.run
+  return ()
 
 -- Check for a message from our worker thread.  If there is a message,
 -- gobble all the messages up and set the label to the contents on the
 -- most recent message.
-tick :: Ref Input -> TChan Integer -> IO ()
+tick :: Ref Output -> TChan Integer -> IO ()
 tick b c = do
   mx <- atomically $ tryReadTChan c
   case mx of
@@ -70,16 +70,18 @@ tick b c = do
           mx <- atomically $ tryReadTChan c
           case mx of
             Nothing -> void $ setValue b (show x) Nothing
-            Just x -> inner x
+            Just x' -> inner x'
 
 
 -- Very slow prime-testing predicate.
+isPrime :: Integer -> Bool
 isPrime 1 = False
 isPrime x = not $ any (\y -> x `mod` y == 0) [2..x-1]
 
 -- Write prime numbers to a channel forever.
+computationThread :: TChan Integer -> IO ()
 computationThread channel = do
   let primes = filter isPrime [1000000..]
   forM_ primes $ \p -> do
-    evaluate p
+    _ <- evaluate p
     atomically $ writeTChan channel p
