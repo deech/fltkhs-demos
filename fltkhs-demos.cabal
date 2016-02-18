@@ -87,8 +87,6 @@ Executable fltkhs-nativefilechooser-simple-app
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
@@ -104,8 +102,6 @@ Executable fltkhs-table-as-container
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
@@ -172,8 +168,6 @@ Executable fltkhs-make-tree
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
