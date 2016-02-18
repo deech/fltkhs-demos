@@ -1,5 +1,5 @@
 name: fltkhs-demos
-version: 0.0.0.3
+version: 0.0.0.4
 synopsis: FLTKHS demos. Please scroll to the bottom for more information.
 description:
   FLTKHS demos moved to a separate package to keep the core package free of additional dependencies.
@@ -45,7 +45,7 @@ Executable fltkhs-pack
   Hs-Source-Dirs: src/Examples
   Build-Depends:
     base == 4.*,
-    directory >= 1.2.2.0,
+    directory >= 1.2.1.0,
     fltkhs >= 0.4.0.0
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
