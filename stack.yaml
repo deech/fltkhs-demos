@@ -10,7 +10,9 @@ packages:
 extra-deps: []
 
 # Override default flag values for local packages and extra-deps
-flags: {}
+flags:
+  fltkhs-demos:
+    fastcompile: true
 
 # Control whether we use the GHC we find on the path
 # system-ghc: true
