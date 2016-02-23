@@ -1,4 +1,4 @@
-#Fltkhs-demos
+# fltkhs-demos
 
 These are end-to-end demos of [FLTKHS] [1], a Haskell Binding to the FLTK GUI Library
 
@@ -11,9 +11,14 @@ on the [fltkhs] [1] API please see the [FLTKHS module] [2] of that package.
 
 The demos shipped with this package are listed in `fltkhs-demos.cabal` as
 separate `Executable` components. Once the package is installed they are
-installed to Cabal's standard /bin/ directory (usually ~/.cabal/bin on Linux).
+installed to a location known to Stack, so to execute `fltkhs-arc` for instance
+do:
 
-Note that the executables are prefixed with \"fltkhs-\". This is in order to
+```
+> stack exec fltkhs-arc
+```
+
+Note that all the executables are prefixed with \"fltkhs-\". This is in order to
 prevent the demo executables from stomping over applications of the same name
 the user might already have installed. Typing:
 
@@ -22,12 +27,6 @@ the user might already have installed. Typing:
 ```
 
 at the command line should show a complete list of available demos.
-
-Alternatively you can do:
-
-```
- > ls ~/.cabal/bin/fltkhs-*
-```
 
 ## Learning The API
 
@@ -49,28 +48,21 @@ source directory. There is quite a bit of correspondence and it is easy to see h
 
 ## Fast Compilation Flag
 
-This package comes with a Cabal flag `fastCompile` that is enabled by default and speeds up compilation. More information on this flag is available under the __Compilation__ section of the [FLTKHS documentation] [2].
+This package comes with a flag `fastCompile` that is enabled by default and speeds up compilation. More information on this flag is available under the __Compilation__ section of the [FLTKHS documentation] [2].
 
-To disable this flag, tell Cabal to ignore it during the `configure` step:
+To disable this flag, tell Stack to ignore it during the `configure` step:
 
 ```
-cabal configure -f-fastCompile
+stack build --flag fltkhs-demos:-fastCompile
 ```
 
 # GHCi
 
-The recommended way to running the REPL in a `fltkhs` application is `cabal repl`. For example to run the `fltkhs-arc` example do:
-
-```
-cabal repl fltkhs-arc
-```
-
-__NOTE__: For now it only works in GHC 7.8.x. GHC 7.10.x has an unfortunate regression that crashes GHCi because it cannot find symbols in the C library that contains the C++ bindings. This has been fixed in GHC 8. More information is available in the [ticket] [4].
-
-
+Please see "Running In The Repl" [5] section of the FLTKHS documentation for more information.
 
 
   [1]: http://hackage.haskell.org/package/fltkhs/
   [2]: http://hackage.haskell.org/package/fltkhs/docs/Graphics-UI-FLTK-LowLevel-FLTKHS.html
   [3]: https://github.com/deech/fltkhs-fluid-hello-world
   [4]: https://ghc.haskell.org/trac/ghc/ticket/10568
+  [5]: http://hackage.haskell.org/package/fltkhs/docs/Graphics-UI-FLTK-LowLevel-FLTKHS.html#g:14
