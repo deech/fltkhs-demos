@@ -1,5 +1,5 @@
 name: fltkhs-demos
-version: 0.0.0.5
+version: 0.0.0.6
 synopsis: FLTKHS demos. Please scroll to the bottom for more information.
 description:
   FLTKHS demos moved to a separate package to keep the core package free of additional dependencies.
