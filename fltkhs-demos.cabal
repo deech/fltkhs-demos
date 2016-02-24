@@ -27,7 +27,7 @@ Executable fltkhs-threads
   Hs-Source-Dirs: src/Examples
   Build-Depends:
      base == 4.*,
-     fltkhs >= 0.4.0.3,
+     fltkhs >= 0.4.0.5,
      stm
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
@@ -46,7 +46,7 @@ Executable fltkhs-pack
   Build-Depends:
     base == 4.*,
     directory >= 1.2.1.0,
-    fltkhs >= 0.4.0.3
+    fltkhs >= 0.4.0.5
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
@@ -64,7 +64,7 @@ Executable fltkhs-tile
   Build-Depends:
     base == 4.*,
     directory,
-    fltkhs >= 0.4.0.3
+    fltkhs >= 0.4.0.5
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
@@ -82,7 +82,7 @@ Executable fltkhs-nativefilechooser-simple-app
   Build-Depends:
     base == 4.*,
     directory,
-    fltkhs >= 0.4.0.3
+    fltkhs >= 0.4.0.5
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
@@ -97,7 +97,7 @@ Executable fltkhs-table-as-container
   Hs-Source-Dirs: src/Examples
   Build-Depends:
     base == 4.*,
-    fltkhs >= 0.4.0.3
+    fltkhs >= 0.4.0.5
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
@@ -112,7 +112,7 @@ Executable fltkhs-texteditor-simple
   Hs-Source-Dirs: src/Examples
   Build-Depends:
     base == 4.*,
-    fltkhs >= 0.4.0.3
+    fltkhs >= 0.4.0.5
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
@@ -129,7 +129,7 @@ Executable fltkhs-textdisplay-with-colors
   Hs-Source-Dirs: src/Examples
   Build-Depends:
     base == 4.*,
-    fltkhs >= 0.4.0.3
+    fltkhs >= 0.4.0.5
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
@@ -146,7 +146,7 @@ Executable fltkhs-doublebuffer
   Hs-Source-Dirs: src/Examples
   Build-Depends:
     base == 4.*,
-    fltkhs >= 0.4.0.3
+    fltkhs >= 0.4.0.5
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
@@ -163,7 +163,7 @@ Executable fltkhs-make-tree
   Hs-Source-Dirs: src/Examples
   Build-Depends:
     base == 4.*,
-    fltkhs >= 0.4.0.3
+    fltkhs >= 0.4.0.5
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
@@ -178,7 +178,7 @@ Executable fltkhs-tree-simple
   Hs-Source-Dirs: src/Examples
   Build-Depends:
     base == 4.*,
-    fltkhs >= 0.4.0.3
+    fltkhs >= 0.4.0.5
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
@@ -195,7 +195,7 @@ Executable fltkhs-table-spreadsheet-with-keyboard-nav
   Hs-Source-Dirs: src/Examples
   Build-Depends:
     base == 4.*,
-    fltkhs >= 0.4.0.3
+    fltkhs >= 0.4.0.5
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
@@ -212,7 +212,7 @@ Executable fltkhs-table-simple
   Hs-Source-Dirs: src/Examples
   Build-Depends:
     base == 4.*,
-    fltkhs >= 0.4.0.3
+    fltkhs >= 0.4.0.5
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
@@ -229,7 +229,7 @@ Executable fltkhs-table-sort
   Hs-Source-Dirs: src/Examples
   Build-Depends:
     base == 4.*,
-    fltkhs >= 0.4.0.3,
+    fltkhs >= 0.4.0.5,
     process
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
@@ -247,7 +247,7 @@ Executable fltkhs-arc
   Hs-Source-Dirs: src/Examples
   Build-Depends:
     base == 4.*,
-    fltkhs >= 0.4.0.3
+    fltkhs >= 0.4.0.5
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
@@ -264,7 +264,7 @@ Executable fltkhs-bitmap
   Hs-Source-Dirs: src/Examples
   Build-Depends:
      base == 4.*,
-     fltkhs >= 0.4.0.3,bytestring
+     fltkhs >= 0.4.0.5,bytestring
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
@@ -281,7 +281,7 @@ Executable fltkhs-boxtype
   Hs-Source-Dirs: src/Examples
   Build-Depends:
      base == 4.*,
-     fltkhs >= 0.4.0.3,bytestring
+     fltkhs >= 0.4.0.5,bytestring
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
@@ -298,7 +298,7 @@ Executable fltkhs-browser
   Hs-Source-Dirs: src/Examples
   Build-Depends:
      base == 4.*,
-     fltkhs >= 0.4.0.3,
+     fltkhs >= 0.4.0.5,
      bytestring
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
@@ -316,7 +316,7 @@ Executable fltkhs-clock
   Hs-Source-Dirs: src/Examples
   Build-Depends:
      base == 4.*,
-     fltkhs >= 0.4.0.3,
+     fltkhs >= 0.4.0.5,
      bytestring
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
