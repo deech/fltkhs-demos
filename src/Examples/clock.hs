@@ -12,6 +12,7 @@ main = do
   w2 <- doubleWindowNew (Size (Width 220) (Height 220)) Nothing (Just "Rounded Clock")
   begin w2
   c2 <- clockNew (toRectangle (0,0,220,220)) Nothing
+  setType c2 (fromIntegral (fromEnum RoundClock))
   setResizable w2 (Just c2)
   end w2
   setXclass w1 "Fl_Clock"
