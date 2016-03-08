@@ -2,31 +2,24 @@
 
 These are end-to-end demos of [FLTKHS] [1], a Haskell Binding to the FLTK GUI Library
 
+__Update__: The [Hackage package] [6] will no longer be updated. Please either clone
+this repo or download it as an archive. The goal is that these demos should always build
+with the latest version of [FLTKHS] [1].
 
 Fltkhs-demos aims not only to show off the features of the [fltkhs] [1] but also
 serve as a way of learning the API by example. For more thorough documentation
 on the [fltkhs] [1] API please see the [FLTKHS module] [2] of that package.
 
-## Introduction
+## Installation
 
-The demos shipped with this package are listed in `fltkhs-demos.cabal` as
-separate `Executable` components. Once the package is installed they are
-installed to a location known to Stack, so to execute `fltkhs-arc` for instance
-do:
+Since the Hackage package is no longer being updated please download or clone
+the repo and build:
 
 ```
+> git clone http://github.com/deech/fltkhs-demos
+> stack install
 > stack exec fltkhs-arc
 ```
-
-Note that all the executables are prefixed with \"fltkhs-\". This is in order to
-prevent the demo executables from stomping over applications of the same name
-the user might already have installed. Typing:
-
-```
- > fltkhs-<TAB>
-```
-
-at the command line should show a complete list of available demos.
 
 ## Learning The API
 
@@ -66,3 +59,4 @@ Please see "Running In The Repl" [5] section of the FLTKHS documentation for mor
   [3]: https://github.com/deech/fltkhs-fluid-hello-world
   [4]: https://ghc.haskell.org/trac/ghc/ticket/10568
   [5]: http://hackage.haskell.org/package/fltkhs/docs/Graphics-UI-FLTK-LowLevel-FLTKHS.html#g:14
+  [6]: http://hackage.haskell.org/package/fltkhs-demos
