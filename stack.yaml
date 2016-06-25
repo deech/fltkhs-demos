@@ -2,6 +2,6 @@ flags: {}
 packages:
 - '.'
 extra-deps:
-- fltkhs-0.4.0.7
+- fltkhs-0.4.0.9
 - text-1.2.2.0
 resolver: lts-5.3
