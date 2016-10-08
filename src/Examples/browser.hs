@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 {-
 This is a test of how the browser draws lines.
 This is a second line.
@@ -37,35 +38,36 @@ That was a blank line above this.
 module Main where
 import qualified Graphics.UI.FLTK.LowLevel.FL as FL
 import Graphics.UI.FLTK.LowLevel.FLTKHS
+import Graphics.UI.FLTK.LowLevel.Fl_Enumerations
 import Control.Monad
 import System.Environment
-
+import qualified Data.Text as T
 data CallbackType = Top | Middle | Bottom | Visible | Browser
 bCb :: Ref SelectBrowser -> IO ()
-bCb browser' = FL.eventClicks >>= setValue browser'
+bCb browser' = FL.eventClicks >>= setValue browser' . LineNumber
 
 showCb :: CallbackType -> Ref IntInput -> Ref SelectBrowser -> IO ()
 showCb buttontype' field' browser' = do
   line' <- getValue field'
-  if (null line')
-    then print "Please enter a number in the text field before clicking on the buttons."
+  if (T.null line')
+    then print ("Please enter a number in the text field before clicking on the buttons." :: String)
     else do
-    let lineNumber' = read line'
+    let lineNumber' = read (T.unpack line')
     case buttontype' of
-     Top -> setTopline browser' lineNumber'
-     Bottom -> setBottomline browser' lineNumber'
-     Middle -> setMiddleline browser' lineNumber'
-     _ -> makeVisible browser' lineNumber'
+     Top -> setTopline browser' (LineNumber lineNumber')
+     Bottom -> setBottomline browser' (LineNumber lineNumber')
+     Middle -> setMiddleline browser' (LineNumber lineNumber')
+     _ -> makeVisible browser' (LineNumber lineNumber')
 
 swapCb :: Ref SelectBrowser -> Ref Button -> IO ()
 swapCb browser' _ =
   do
     browserSize' <- getSize browser'
-    linesSelected' <- filterM (selected browser') [0..(browserSize' - 1)]
+    linesSelected' <- filterM (selected browser') (map LineNumber [0..(browserSize' - 1)])
     case linesSelected' of
      (l1:l2:_) -> swap browser' l1 l2
-     (l1:[]) -> swap browser' l1 (-1)
-     _ -> swap browser' (-1) (-1)
+     (l1:[]) -> swap browser' l1 (LineNumber (-1))
+     _ -> swap browser' (LineNumber (-1)) (LineNumber (-1))
 
 sortCb :: Ref SelectBrowser -> Ref Button -> IO ()
 sortCb browser' _ = sortWithSortType browser' SortAscending
@@ -73,8 +75,8 @@ sortCb browser' _ = sortWithSortType browser' SortAscending
 btypeCb :: Ref SelectBrowser -> Ref Choice -> IO ()
 btypeCb browser' btype' = do
   numLines' <- getSize browser'
-  forM_ [1..(numLines' - 1)] (\l -> select browser' l False)
-  _ <- select browser' 1 False -- leave focus box on first line
+  forM_ [1..(numLines' - 1)] (\l -> select browser' (LineNumber l) False)
+  _ <- select browser' (LineNumber 1) False -- leave focus box on first line
   choice' <- getText btype'
   case choice' of
    "Normal" -> setType browser' NormalBrowserType
@@ -87,18 +89,18 @@ btypeCb browser' btype' = do
 main :: IO ()
 main = do
   args <- getArgs
-  if (null args) then print "Enter the path to a text file as an argument. As an example use this file (./src/Examples/browser.hs) to see what Fl_Browser can do."
+  if (null args) then print ("Enter the path to a text file as an argument. As an example use this file (./src/Examples/browser.hs) to see what Fl_Browser can do." :: String)
     else do
-     let fname = head args
+     let fname = T.pack (head args)
      window <- doubleWindowNew (Size (Width 560) (Height 400)) Nothing (Just fname)
      browser' <- selectBrowserNew (Rectangle (Position (X 0) (Y 0)) (Size (Width 560) (Height 350))) Nothing
      setType browser' MultiBrowserType
      setCallback browser' bCb
      loadStatus' <- load browser' fname
      if (loadStatus' == 0)
-       then print ("Can't load " ++ fname)
+       then print ("Can't load " ++ T.unpack fname)
        else do
-       setPosition browser' 0
+       setPosition browser' (PixelPosition 0)
        field <- intInputNew (toRectangle (55,350,505,25)) (Just "Line #:")
        setCallback field (\_ -> showCb Browser field browser')
        top' <- buttonNew (toRectangle (0,375,80,25)) (Just "Top")

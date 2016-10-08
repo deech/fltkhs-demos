@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 module Main where
 import qualified Graphics.UI.FLTK.LowLevel.FL as FL
 import Graphics.UI.FLTK.LowLevel.Fl_Types
@@ -5,14 +6,14 @@ import Graphics.UI.FLTK.LowLevel.Fl_Enumerations
 import Graphics.UI.FLTK.LowLevel.FLTKHS
 import Data.IORef
 import Control.Monad
-
+import qualified Data.Text as T
 windowWidth :: Int
 windowWidth = 200
 rowHeight :: Int
 rowHeight = 50
 numRows :: Int
 numRows = 14
-bt :: IORef Int -> String -> Boxtype -> Bool -> IO ()
+bt :: IORef Int -> T.Text -> Boxtype -> Bool -> IO ()
 bt n label' boxtype' square' = do
   n' <- readIORef n
   let (quotient',remainder') = quotRem n' 4

@@ -1,14 +1,15 @@
+{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 module Main where
 import qualified Graphics.UI.FLTK.LowLevel.FL as FL
 import Graphics.UI.FLTK.LowLevel.Fl_Types
 import Graphics.UI.FLTK.LowLevel.Fl_Enumerations
 import Graphics.UI.FLTK.LowLevel.FLTKHS
-
+import qualified Data.Text as T
 buttonCb :: Ref LightButton -> IO ()
 buttonCb lightButton = do
   l' <- getLabel lightButton
-  print $ "BUTTON: " ++ l'
+  print $ "BUTTON: " ++ (T.unpack l')
 
 setTableSize :: Ref Table -> Int -> Int -> IO ()
 setTableSize t' nr' nc' = do
@@ -24,13 +25,13 @@ setTableSize t' nr' nc' = do
          Just cellRectangle' ->
            if (odd _c)
            then do
-            let s = (show _r) ++ "." ++ (show _c)
+            let s = T.pack ((show _r) ++ "." ++ (show _c))
             input_ <- inputNew cellRectangle' Nothing Nothing
             _ <- setValue input_ s Nothing
             return ()
            else
              do
-               let s = (show _r) ++ "/" ++ (show _c)
+               let s = T.pack ((show _r) ++ "/" ++ (show _c))
                butt <- lightButtonNew cellRectangle' (Just s)
                setAlign butt (Alignments [AlignTypeCenter, AlignTypeInside])
                setCallback butt buttonCb
@@ -66,7 +67,7 @@ drawCell t' tcontext' (TableCoordinate (Row tr') (Column tc')) r' =
       initSizes t'
     ContextRowHeader -> do
       flcPushClip r'
-      let s = "Row " ++ (show tr')
+      let s = T.pack ("Row " ++ (show tr'))
       headerColor <- getRowHeaderColor t'
       flcDrawBox ThinUpBox r' headerColor
       flcSetColor blackColor
@@ -74,7 +75,7 @@ drawCell t' tcontext' (TableCoordinate (Row tr') (Column tc')) r' =
       flcPopClip
     ContextColHeader -> do
       flcPushClip r'
-      let s = "Column " ++ (show tc')
+      let s = T.pack ("Column " ++ (show tc'))
       headerColor <- getColHeaderColor t'
       flcDrawBox ThinUpBox r' headerColor
       flcSetColor blackColor

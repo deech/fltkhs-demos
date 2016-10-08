@@ -1,12 +1,14 @@
+{-# LANGUAGE OverloadedStrings #-}
 module Main where
 import qualified Graphics.UI.FLTK.LowLevel.FL as FL
 import Graphics.UI.FLTK.LowLevel.Fl_Types
 import Graphics.UI.FLTK.LowLevel.Fl_Enumerations
 import Graphics.UI.FLTK.LowLevel.FLTKHS
 import Data.IORef
+import qualified Data.Text as T
 import Control.Monad
 
-name :: [String]
+name :: [T.Text]
 name = ["X", "Y", "R", "start", "end", "rotate"]
 
 drawArc :: IORef [Double] -> Ref Widget -> IO ()

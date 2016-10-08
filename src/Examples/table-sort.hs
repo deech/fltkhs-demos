@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE CPP #-}
 module Main where
 import qualified Graphics.UI.FLTK.LowLevel.FL as FL
@@ -9,8 +10,9 @@ import Data.IORef
 import Data.List
 import Data.Function
 import System.Process
-dirCommand :: ([Char], [[Char]])
-dirHeaders :: [[Char]]
+import qualified Data.Text as T
+dirCommand :: (String, [String])
+dirHeaders :: [T.Text]
 #ifdef mingw32_HOST_OS
 dirCommand = ("dir", [])
 dirHeaders = ["Perms", "#L", "Own", "Group", "Size", "Date", "", "", "Filename"]
@@ -32,7 +34,7 @@ rowFontSize = FontSize 16
 data TableState = TableState {
   sortReverse :: IORef Bool,
   sortLastCol :: IORef Int,
-  rowData :: IORef [[String]]
+  rowData :: IORef [[T.Text]]
   }
 
 drawSortArrow :: Rectangle -> Bool -> IO ()
@@ -155,7 +157,7 @@ eventCallback tableState table = do
   where toggle True = False
         toggle False = True
 
-autowidth :: Ref TableRow -> Int -> [[String]] -> IO ()
+autowidth :: Ref TableRow -> Int -> [[T.Text]] -> IO ()
 autowidth table pad rowData' = do
   flcSetFont headerFontFace headerFontSize
   mapM_
@@ -206,7 +208,7 @@ main = do
               (Just "Table Sorting")
   windowW <- getW window
   windowH <- getH window
-  rows <- uncurry readProcess dirCommand "" >>= return . map words . lines
+  rows <- uncurry readProcess dirCommand "" >>= return . map T.words . T.lines . T.pack
   rowData' <- newIORef rows
   sortReverse' <- newIORef False
   sortLastCol' <- newIORef (-1)

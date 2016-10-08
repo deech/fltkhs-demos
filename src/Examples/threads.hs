@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 -- This example shows how to run a CPU-intensive thread in the
 -- background while keeping the UI responsive.  All FLTK calls are
 -- done on the main thread.
@@ -17,7 +18,7 @@ import Control.Concurrent.STM
 import Control.Exception (evaluate)
 import Control.Monad
 import Data.IORef
-
+import qualified Data.Text as T
 main :: IO ()
 main = do
   -- Set up the window and widgets.
@@ -39,14 +40,14 @@ main = do
 
   -- Start the click counter at zero.
   counterRef <- newIORef (0 :: Integer)
-  _ <- setValue counter (show (0 :: Integer)) Nothing
+  _ <- setValue counter (T.pack (show (0 :: Integer))) Nothing
 
   -- When the button is pressed, increment the counter and update the
   -- label.
   setCallback button $ \_ -> do
     modifyIORef counterRef (+1)
     x <- readIORef counterRef
-    void $ setValue counter (show x) Nothing
+    void $ setValue counter (T.pack (show x)) Nothing
 
   -- Every so often, check for messages from our worker thread.
   FL.addTimeout 0.025 (tick b c)
@@ -69,7 +70,7 @@ tick b c = do
   where inner x = do
           mx <- atomically $ tryReadTChan c
           case mx of
-            Nothing -> void $ setValue b (show x) Nothing
+            Nothing -> void $ setValue b (T.pack (show x)) Nothing
             Just x' -> inner x'
 
 

@@ -1,8 +1,9 @@
+{-# LANGUAGE OverloadedStrings #-}
 module Main where
 import qualified Graphics.UI.FLTK.LowLevel.FL as FL
 import Graphics.UI.FLTK.LowLevel.FLTKHS
 import Graphics.UI.FLTK.LowLevel.Fl_Enumerations
-
+import qualified Data.Text as T
 maxRows :: Int
 maxRows = 30
 maxCols :: Int
@@ -13,7 +14,7 @@ tableData =
         colIndices = [0 .. (maxCols - 1)]
     in
       map (\r -> map (\c -> 1000 + (r * 1000) + c) colIndices) rowIndices
-drawHeader :: Ref Table -> String -> Rectangle -> IO ()
+drawHeader :: Ref Table -> T.Text -> Rectangle -> IO ()
 drawHeader table s rectangle = do
   flcPushClip rectangle
   rhc <- getRowHeaderColor table
@@ -21,7 +22,7 @@ drawHeader table s rectangle = do
   flcSetColor blackColor
   flcDrawInBox s rectangle alignCenter Nothing Nothing
   flcPopClip
-drawData :: Ref Table -> String -> Rectangle -> IO ()
+drawData :: Ref Table -> T.Text -> Rectangle -> IO ()
 drawData table s rectangle = do
   flcPushClip rectangle
   flcSetColor whiteColor >> flcRectf rectangle
@@ -38,9 +39,9 @@ drawCell table context (TableCoordinate (Row row) (Column col)) rectangle = do
            currentLetter :: Char
            currentLetter = (toEnum $ fromEnum a + col)
        in
-       drawHeader table [currentLetter] rectangle
-   ContextRowHeader -> drawHeader table (show row) rectangle
-   ContextCell -> drawData table (show $ tableData !! row !! col) rectangle
+       drawHeader table (T.pack [currentLetter]) rectangle
+   ContextRowHeader -> drawHeader table (T.pack (show row)) rectangle
+   ContextCell -> drawData table (T.pack (show $ tableData !! row !! col)) rectangle
    _ -> return ()
 initializeTable :: Ref Table -> IO ()
 initializeTable table = do

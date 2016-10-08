@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE FlexibleContexts, ScopedTypeVariables #-}
 module Main where
 import qualified Graphics.UI.FLTK.LowLevel.FL as FL

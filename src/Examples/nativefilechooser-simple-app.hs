@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 module Main where
 import qualified Graphics.UI.FLTK.LowLevel.FL as FL
 import Graphics.UI.FLTK.LowLevel.Fl_Types
@@ -5,7 +6,7 @@ import Graphics.UI.FLTK.LowLevel.Fl_Enumerations
 import Graphics.UI.FLTK.LowLevel.FLTKHS
 import System.Directory
 import System.Exit
-
+import qualified Data.Text as T
 openFile :: FilePath -> IO ()
 openFile fp = print $ "Open '" ++ fp ++ "''"
 
@@ -27,7 +28,7 @@ openCb fc _ = do
      case f' of
       (Just f'') -> do
         setPresetFile fc f''
-        openFile f''
+        openFile (T.unpack f'')
       _ -> return ()
    _ -> return ()
 
@@ -41,7 +42,7 @@ saveAsCb fc _ = do
      case f' of
       (Just f'') -> do
         setPresetFile fc f''
-        saveFile f''
+        saveFile (T.unpack f'')
       _ -> return ()
    _ -> return ()
 
@@ -50,7 +51,7 @@ saveCb fc w' = do
   f' <- getFilename fc
   case f' of
    Nothing -> saveAsCb fc w'
-   (Just f'') -> saveFile f''
+   (Just f'') -> saveFile (T.unpack f'')
 
 quitCb :: Ref MenuItem -> IO ()
 quitCb _ = exitSuccess
@@ -72,12 +73,12 @@ initializeWindow w' = do
   setColor box' (Color 45)
   setBox box' FlatBox
   setAlign box' (Alignments [AlignTypeCenter, AlignTypeInside, AlignTypeWrap])
-  setLabel box' $ "This demo shows an example of implementing " ++
-                  "common 'File' menu operations like:\n" ++
-                  "    File/Open, File/Save, File/Save As\n" ++
-                  "..using the Fl_Native_File_Chooser widget.\n\n" ++
-                  "Note 'Save' and 'Save As' really *does* create files! " ++
-                  "This is to show how behavior differs when " ++
+  setLabel box' $ "This demo shows an example of implementing " `T.append`
+                  "common 'File' menu operations like:\n" `T.append`
+                  "    File/Open, File/Save, File/Save As\n" `T.append`
+                  "..using the Fl_Native_File_Chooser widget.\n\n" `T.append`
+                  "Note 'Save' and 'Save As' really *does* create files! " `T.append`
+                  "This is to show how behavior differs when " `T.append`
                   "files exist vs. do not.";
   setLabelsize box' (FontSize 12)
   end w'

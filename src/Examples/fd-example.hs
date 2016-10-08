@@ -1,14 +1,16 @@
+{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE CPP #-}
 module Main where
 import qualified Graphics.UI.FLTK.LowLevel.FL as FL
 import Graphics.UI.FLTK.LowLevel.Fl_Types
 import Graphics.UI.FLTK.LowLevel.FLTKHS
+import Graphics.UI.FLTK.LowLevel.Utils
 import Foreign.C.String
 import Foreign.C.Types
 import Foreign.Ptr
 import Foreign.Marshal.Alloc
-
-pingCommand :: String
+import qualified Data.Text as T
+pingCommand :: T.Text
 #ifdef mingw32_HOST_OS
 pingCommand = "ping -n 10 localhost" -- 'slow command' under windows
 #else
@@ -31,7 +33,7 @@ main = do
   begin w
   b <- browserNew (toRectangle (10,10,580,580)) Nothing
   setType b MultiBrowserType
-  pingCommandPtr <- newCString pingCommand
+  pingCommandPtr <- copyTextToCString pingCommand
   stream <- popenShim pingCommandPtr
   fd <- filenoShim stream
   FL.addFd fd (handleFD stream b)
@@ -45,13 +47,13 @@ main = do
 -- unfortunately there aren't portable equivalents in the Haskell
 -- libraries. They all seem to depend on the `unix` package which
 -- will not build on Windows.
-getLineShim :: Ptr () -> IO (Maybe String)
+getLineShim :: Ptr () -> IO (Maybe T.Text)
 getLineShim stream = do
   linePtr <- getLineShim' stream
   if (linePtr == nullPtr)
     then return Nothing
     else do
-     line <- peekCString linePtr
+     line <- cStringToText linePtr
      free linePtr
      return (Just line)
 

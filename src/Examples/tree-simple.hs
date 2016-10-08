@@ -1,8 +1,9 @@
+{-# LANGUAGE OverloadedStrings #-}
 module Main where
 import qualified Graphics.UI.FLTK.LowLevel.FL as FL
 import Graphics.UI.FLTK.LowLevel.Fl_Types
 import Graphics.UI.FLTK.LowLevel.FLTKHS
-
+import qualified Data.Text as T
 treeCallback :: Ref Tree -> IO ()
 treeCallback tree' = do
   (Just item') <- getCallbackItem tree'
@@ -11,13 +12,13 @@ treeCallback tree' = do
   case reason' of
     TreeReasonSelected -> do
       (Just path') <- itemPathname tree' item'
-      print $ "TreeCallback: Item selected =" ++ label' ++ "Full pathname=" ++ path' ++ "\n"
+      print $ "TreeCallback: Item selected =" ++ (T.unpack label') ++ "Full pathname=" ++ (T.unpack path') ++ "\n"
     TreeReasonDeselected ->
-      print $ "TreeCallback: Item deselected =" ++ label' ++ "\n"
+      print $ "TreeCallback: Item deselected =" ++ (T.unpack label') ++ "\n"
     TreeReasonOpened ->
-      print $ "TreeCallback: Item opened =" ++ label' ++ "\n"
+      print $ "TreeCallback: Item opened =" ++ (T.unpack label') ++ "\n"
     TreeReasonClosed ->
-      print $ "TreeCallback: Item closed =" ++ label' ++ "\n"
+      print $ "TreeCallback: Item closed =" ++ (T.unpack label') ++ "\n"
     _ -> print ""
 main :: IO ()
 main = do

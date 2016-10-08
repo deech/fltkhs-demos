@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 module Main where
 import           Data.IORef
@@ -5,7 +6,7 @@ import qualified Graphics.UI.FLTK.LowLevel.FL              as FL
 import           Graphics.UI.FLTK.LowLevel.Fl_Enumerations
 import           Graphics.UI.FLTK.LowLevel.Fl_Types
 import           Graphics.UI.FLTK.LowLevel.FLTKHS
-
+import qualified Data.Text as T
 maxCols, maxRows :: Int
 maxCols = 26
 maxRows = 500
@@ -33,7 +34,7 @@ setIndex idx' f xs =
 setValueHide :: IORef SpreadsheetProperties -> Ref Table -> Ref IntInput -> IO ()
 setValueHide sp' table' intInput' = do
   props' <- readIORef sp'
-  inputValue' <- getValue intInput' >>= return . read
+  inputValue' <- getValue intInput' >>= return . read . T.unpack
   let updatedValues' = setIndex
                          (rowEdit props')
                          (setIndex
@@ -58,7 +59,7 @@ startEditing props' intInput' table' row' col' = do
     Just rect' -> do
       resize intInput' rect'
       let cellContents = (values _p) !! (rowEdit _p) !! (colEdit _p)
-      _ <- setValue intInput' (show cellContents) Nothing
+      _ <- setValue intInput' (T.pack (show cellContents)) Nothing
       _ <- setPosition intInput' 0 (Just (length $ show cellContents))
       showWidget intInput'
       _ <- takeFocus intInput'
@@ -139,7 +140,7 @@ drawCell props' intInput' table' context' (TableCoordinate (Row row') (Column co
      flcSetColor blackColor
      if (col' == numCols' - 1)
        then flcDrawInBox "TOTAL" rectangle' alignCenter Nothing Nothing
-       else flcDrawInBox [toEnum $ fromEnum 'A' + col'] rectangle' alignCenter Nothing Nothing
+       else flcDrawInBox (T.pack [toEnum $ fromEnum 'A' + col']) rectangle' alignCenter Nothing Nothing
      flcPopClip
    ContextRowHeader -> do
      flcSetFont helveticaBold (FontSize 14)
@@ -148,7 +149,7 @@ drawCell props' intInput' table' context' (TableCoordinate (Row row') (Column co
      flcSetColor blackColor
      if (row' == numRows' - 1)
        then flcDrawInBox "TOTAL" rectangle' alignCenter Nothing Nothing
-       else flcDrawInBox (show $ row' + 1) rectangle' alignCenter Nothing Nothing
+       else flcDrawInBox (T.pack (show $ row' + 1)) rectangle' alignCenter Nothing Nothing
      flcPopClip
    ContextCell-> do
      visible' <- getVisible intInput'
@@ -178,12 +179,12 @@ drawCell props' intInput' table' context' (TableCoordinate (Row row') (Column co
                                    then (show . sum . map (\r -> r !! col')) shownValues
                                    else ""
                 let (x',y',w',h') = fromRectangle rectangle'
-                flcDrawInBox s' (toRectangle (x'+3,y'+3,w'-6,h'-6)) alignRight Nothing Nothing
+                flcDrawInBox (T.pack s') (toRectangle (x'+3,y'+3,w'-6,h'-6)) alignRight Nothing Nothing
               else do
                 flcSetFont helvetica (FontSize 14)
                 let s' = show $ (values _p) !! row' !! col'
                 let (x',y',w',h') = fromRectangle rectangle'
-                flcDrawInBox s' (toRectangle (x'+3,y'+3,w'-6,h'-6)) alignRight Nothing Nothing
+                flcDrawInBox (T.pack s') (toRectangle (x'+3,y'+3,w'-6,h'-6)) alignRight Nothing Nothing
             flcPopClip
    ContextRCResize -> do
      visible' <- getVisible intInput'
