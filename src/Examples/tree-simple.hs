@@ -19,7 +19,7 @@ treeCallback tree' = do
       print $ "TreeCallback: Item opened =" ++ (T.unpack label') ++ "\n"
     TreeReasonClosed ->
       print $ "TreeCallback: Item closed =" ++ (T.unpack label') ++ "\n"
-    _ -> print ""
+    _ -> print ("" :: String)
 main :: IO ()
 main = do
   _ <- FL.setScheme "gtk+"
