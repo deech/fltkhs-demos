@@ -38,13 +38,15 @@ That was a blank line above this.
 module Main where
 import qualified Graphics.UI.FLTK.LowLevel.FL as FL
 import Graphics.UI.FLTK.LowLevel.FLTKHS
-import Graphics.UI.FLTK.LowLevel.Fl_Enumerations
 import Control.Monad
 import System.Environment
 import qualified Data.Text as T
 data CallbackType = Top | Middle | Bottom | Visible | Browser
 bCb :: Ref SelectBrowser -> IO ()
-bCb browser' = FL.eventClicks >>= setValue browser' . LineNumber
+bCb browser' = do
+  lineNumber <- getValue browser'
+  clicks <- FL.eventClicks
+  putStrLn ("callback, selection = " ++ (show lineNumber) ++ " eventClicks = " ++ (show clicks))
 
 showCb :: CallbackType -> Ref IntInput -> Ref SelectBrowser -> IO ()
 showCb buttontype' field' browser' = do
