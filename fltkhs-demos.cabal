@@ -33,13 +33,14 @@ Executable fltkhs-threads
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
-     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
+   ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
-    ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
 Executable fltkhs-pack
   Main-Is: pack.hs
@@ -51,9 +52,10 @@ Executable fltkhs-pack
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
-     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
   if os(windows)
    ghc-Options: -optl-mwindows
+   ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
@@ -69,9 +71,10 @@ Executable fltkhs-tile
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
-     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
+   ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
@@ -89,6 +92,9 @@ Executable fltkhs-nativefilechooser-simple-app
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
+  if os(windows)
+   ghc-Options: -optl-mwindows
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
@@ -105,6 +111,9 @@ Executable fltkhs-table-as-container
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
+  if os(windows)
+   ghc-Options: -optl-mwindows
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
@@ -122,6 +131,7 @@ Executable fltkhs-texteditor-simple
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
@@ -139,6 +149,7 @@ Executable fltkhs-textdisplay-with-colors
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
@@ -156,6 +167,7 @@ Executable fltkhs-doublebuffer
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
@@ -171,6 +183,9 @@ Executable fltkhs-make-tree
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
+  if os(windows)
+   ghc-Options: -optl-mwindows
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
@@ -189,6 +204,7 @@ Executable fltkhs-tree-simple
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
@@ -207,6 +223,7 @@ Executable fltkhs-table-spreadsheet-with-keyboard-nav
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
@@ -225,6 +242,7 @@ Executable fltkhs-table-simple
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
@@ -244,6 +262,7 @@ Executable fltkhs-table-sort
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
@@ -262,6 +281,7 @@ Executable fltkhs-arc
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
@@ -279,6 +299,7 @@ Executable fltkhs-bitmap
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
@@ -298,6 +319,7 @@ Executable fltkhs-boxtype
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
@@ -317,6 +339,7 @@ Executable fltkhs-browser
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
@@ -334,7 +357,8 @@ Executable fltkhs-clock
   if impl(ghc >= 7.10) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
-   ghc-Options: -optl-mwindows
+     ghc-Options: -optl-mwindows
+     ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
@@ -359,6 +383,7 @@ Executable fltkhs-fd-example
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
   if os(darwin)
    ghc-Options: -pgml g++ "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)

@@ -12,17 +12,19 @@ import Foreign.Marshal.Alloc
 import qualified Data.Text as T
 pingCommand :: T.Text
 #ifdef mingw32_HOST_OS
+type Fl_Socket = CULLong
 pingCommand = "ping -n 10 localhost" -- 'slow command' under windows
 #else
+type Fl_Socket = CInt
 pingCommand = "ping -i 2 -c 10 localhost"
 #endif
 
-handleFD :: Ptr () -> Ref Browser -> CInt -> IO ()
+handleFD :: Ptr () -> Ref Browser -> Fl_Socket -> IO ()
 handleFD stream b fd =
   getLineShim stream >>= maybe atEOF (add b)
   where
     atEOF = do
-      FL.removeFd fd
+      FL.removeFd (fromIntegral fd)
       pcloseShim stream
       add b ""
       add b "<<DONE>>"
