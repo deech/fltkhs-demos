@@ -1,7 +1,4 @@
 flags: {}
 packages:
 - '.'
-extra-deps:
-- fltkhs-0.5.0.1
-- text-1.2.2.0
-resolver: lts-5.3
+resolver: lts-7.16
