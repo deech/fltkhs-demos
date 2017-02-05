@@ -52,10 +52,10 @@ Executable fltkhs-pack
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
   if impl(ghc >= 7.10) && flag(FastCompile)
-   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
+   ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
-   ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
   if os(darwin)
    ghc-Options: "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
