@@ -389,3 +389,22 @@ Executable fltkhs-fd-example
    ghc-Options: "-optl-Wl,-lfltkc"
   if !os(darwin) && !os(windows)
    ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
+
+Executable fltkhs-howto-drag-and-drop
+  Main-Is: howto-drag-and-drop.hs
+  Hs-Source-Dirs: src/Examples
+  Build-Depends:
+     base == 4.*,
+     fltkhs >= 0.5.1.1,
+     text >= 0.2 && < 1.3
+  default-language: Haskell2010
+  ghc-Options: -Wall -threaded
+  if impl(ghc >= 7.10) && flag(FastCompile)
+     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
+  if os(windows)
+   ghc-Options: -optl-mwindows
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
+  if os(darwin)
+   ghc-Options: "-optl-Wl,-lfltkc"
+  if !os(darwin) && !os(windows)
+   ghc-Options: -pgml g++ "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
