@@ -1,19 +1,22 @@
 # fltkhs-demos
 
-These are end-to-end demos of [FLTKHS] [1], a Haskell Binding to the FLTK GUI Library
+These are end-to-end demos of [FLTKHS][1], a Haskell Binding to the FLTK GUI
+Library
 
-__Update__: The [Hackage package] [6] will no longer be updated. Please either clone
-this repo or download it as an archive. The goal is that these demos should always build
-with the latest version of [FLTKHS] [1].
-
-Fltkhs-demos aims not only to show off the features of the [fltkhs] [1] but also
+Fltkhs-demos aims not only to show off the features of the [FLTKHS][1] but also
 serve as a way of learning the API by example. For more thorough documentation
-on the [fltkhs] [1] API please see the [FLTKHS module] [2] of that package.
+on the [FLTKHS][1] API please see the [FLTKHS module][2] of that package.
 
 ## Installation
 
-Since the Hackage package is no longer being updated please download or clone
-the repo and build:
+In order to install and run these demos you will first need to install
+the [FLTK C++ library][8]. Please follow the installation instructions
+for [FLTKHS][7] but only to the point of installing the C++ library. The full
+installation is geared toward getting a minimal `hello world` up and running so
+it's not bad to do it all, just involves some unnecessary steps if all you care
+about is the demos.
+
+Once the C++ library is installed the only thing left to do is:
 
 ```
 > git clone http://github.com/deech/fltkhs-demos
@@ -26,22 +29,29 @@ the repo and build:
 Most of the demos are exact ports of those shipped in the 'test' directory of
 the <http://fltk.org FLTK> distribution. It is hoped the user will study the
 Haskell demo code side-by-side with the C++ demo code in order to understand the
-API. The section __API Guide__ in the [FLKTHS documentation] [2] covers this in more detail.
+API. The section __API Guide__ in the [FLKTHS documentation][2] covers this in
+more detail.
 
 ## Why is the demo code so un-Haskelly?
-For being written in Haskell, the demo code is horrifyingly/amazingly imperative and stateful. Although it may repulse those
-who used to pure Haskell idioms it is that way for a reason.
+For being written in Haskell, the demo code is horrifyingly/amazingly imperative
+and stateful. Although it may repulse those who used to pure Haskell idioms it
+is that way for a reason.
 
-The demo code was never meant to be idiomatic Haskell code but a way of showing as much of the API as possible. The API itself
-closely resembles the underlying C++ code which is imperative and stateful. This has the advantage of making the API easier
-to learn.
+The demo code was never meant to be idiomatic Haskell code but a way of showing
+as much of the API as possible. The API itself closely resembles the underlying
+C++ code which is imperative and stateful. This has the advantage of making the
+API easier to learn.
 
-For instance, assuming FLTK was installed from source compare /src/Examples/arc.hs with /test/arc.cxx in the FLTK
-source directory. There is quite a bit of correspondence and it is easy to see how the Haskell API functions map to the C++ ones.
+For instance, assuming FLTK was installed from source compare
+/src/Examples/arc.hs with /test/arc.cxx in the FLTK source directory. There is
+quite a bit of correspondence and it is easy to see how the Haskell API
+functions map to the C++ ones.
 
 ## Fast Compilation Flag
 
-This package comes with a flag `fastCompile` that is enabled by default and speeds up compilation. More information on this flag is available under the __Compilation__ section of the [FLTKHS documentation] [2].
+This package comes with a flag `fastCompile` that is enabled by default and
+speeds up compilation. More information on this flag is available under the
+__Compilation__ section of the [FLTKHS documentation][2].
 
 To disable this flag, tell Stack to ignore it during the `configure` step:
 
@@ -60,3 +70,5 @@ Please see "Running In The Repl" [5] section of the FLTKHS documentation for mor
   [4]: https://ghc.haskell.org/trac/ghc/ticket/10568
   [5]: http://hackage.haskell.org/package/fltkhs/docs/Graphics-UI-FLTK-LowLevel-FLTKHS.html#g:14
   [6]: http://hackage.haskell.org/package/fltkhs-demos
+  [7]: https://github.com/deech/fltkhs#quick-install
+  [8]: http://fltk.org.
