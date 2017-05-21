@@ -9,18 +9,11 @@ on the [FLTKHS][1] API please see the [FLTKHS module][2] of that package.
 
 ## Installation
 
-In order to install and run these demos you will first need to install
-the [FLTK C++ library][8]. Please follow the installation instructions
-for [FLTKHS][7] but only to the point of installing the C++ library. The full
-installation is geared toward getting a minimal `hello world` up and running so
-it's not bad to do it all, just involves some unnecessary steps if all you care
-about is the demos.
-
-Once the C++ library is installed the only thing left to do is:
+[FLTKHS] [1] now bundles the [FLTK] [8] source so all you need to do is:
 
 ```
 > git clone http://github.com/deech/fltkhs-demos
-> stack install
+> stack install --flag fltkhs:bundled
 > stack exec fltkhs-arc
 ```
 
@@ -56,7 +49,7 @@ __Compilation__ section of the [FLTKHS documentation][2].
 To disable this flag, tell Stack to ignore it during the `configure` step:
 
 ```
-stack build --flag fltkhs-demos:-fastCompile
+stack build --flag fltkhs-demos:-fastCompile --flag fltkhs:bundled
 ```
 
 # GHCi
