@@ -136,23 +136,25 @@ eventCallback tableState table = do
    ContextColHeader -> do
      event' <- FL.event
      mouseButton' <- FL.eventButton
-     if (event' == Release && mouseButton' == Mouse_Left)
-       then do
-         sortLastCol' <- readIORef (sortLastCol tableState)
-         if (sortLastCol' == col')
-           then readIORef (sortReverse tableState) >>= writeIORef (sortReverse tableState) . toggle
-           else writeIORef (sortReverse tableState) False
-         sortReverse' <- readIORef (sortReverse tableState)
-         rowData' <- readIORef (rowData tableState) >>= return . zip [(0 :: Int)..]
-         let sorted = sortBy (compare `on` (indexOr "" col'. snd)) rowData'
-         writeIORef
-           (rowData tableState)
-           (if sortReverse'
-            then (reverse $ map snd sorted)
-            else map snd sorted)
-         writeIORef (sortLastCol tableState) col'
-         redraw table
-         else return ()
+     case mouseButton' of
+       Nothing -> return ()
+       Just mb' -> if (event' == Release && mb' == Mouse_Left)
+                   then do
+                     sortLastCol' <- readIORef (sortLastCol tableState)
+                     if (sortLastCol' == col')
+                       then readIORef (sortReverse tableState) >>= writeIORef (sortReverse tableState) . toggle
+                       else writeIORef (sortReverse tableState) False
+                     sortReverse' <- readIORef (sortReverse tableState)
+                     rowData' <- readIORef (rowData tableState) >>= return . zip [(0 :: Int)..]
+                     let sorted = sortBy (compare `on` (indexOr "" col'. snd)) rowData'
+                     writeIORef
+                       (rowData tableState)
+                       (if sortReverse'
+                        then (reverse $ map snd sorted)
+                        else map snd sorted)
+                     writeIORef (sortLastCol tableState) col'
+                     redraw table
+                     else return ()
    _ -> return ()
   where toggle True = False
         toggle False = True
