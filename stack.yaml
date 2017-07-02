@@ -3,5 +3,5 @@ packages:
 - '.'
 resolver: lts-8.13
 extra-deps:
-- fltkhs-0.5.3.0
+- fltkhs-0.5.3.3
 - text-1.2.2.0
