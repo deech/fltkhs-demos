@@ -8,7 +8,7 @@ import System.FilePath
 import System.Environment (getEnv, setEnv)
 import Distribution.Simple.LocalBuildInfo (installedPkgs)
 import Distribution.Simple.PackageIndex (lookupDependency)
-import Distribution.Package (Dependency, PackageName)
+import Distribution.Package (Dependency, mkPackageName)
 import Distribution.Version (anyVersion)
 import Distribution.System (buildOS, OS(Windows, OSX))
 import Distribution.InstalledPackageInfo
@@ -18,7 +18,7 @@ main :: IO ()
 main = defaultMainWithHooks (simpleUserHooks { buildHook = myBuildHook })
 
 myBuildHook pkg_descr local_bld_info user_hooks bld_flags =
-  let fltkhsDependency = lookupDependency (installedPkgs local_bld_info) (Dependency (PackageName "fltkhs") anyVersion)
+  let fltkhsDependency = lookupDependency (installedPkgs local_bld_info) (Dependency (mkPackageName "fltkhs") anyVersion)
       keepBuilding = (buildHook simpleUserHooks) pkg_descr local_bld_info user_hooks bld_flags
   in
   case fltkhsDependency of
