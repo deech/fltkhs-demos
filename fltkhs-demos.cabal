@@ -32,7 +32,7 @@ Executable fltkhs-threads
      text >= 0.2 && < 1.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && flag(FastCompile)
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
    ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
@@ -51,7 +51,7 @@ Executable fltkhs-pack
     fltkhs >= 0.5.4.1
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && flag(FastCompile)
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
    ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
@@ -70,7 +70,7 @@ Executable fltkhs-tile
     fltkhs >= 0.5.4.1
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && flag(FastCompile)
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
    ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
@@ -90,7 +90,7 @@ Executable fltkhs-nativefilechooser-simple-app
     text >= 0.2 && < 1.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && flag(FastCompile)
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
@@ -109,7 +109,7 @@ Executable fltkhs-table-as-container
     text >= 0.2 && < 1.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && flag(FastCompile)
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
@@ -127,7 +127,7 @@ Executable fltkhs-texteditor-simple
     fltkhs >= 0.5.4.1
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && flag(FastCompile)
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
@@ -145,7 +145,7 @@ Executable fltkhs-textdisplay-with-colors
     fltkhs >= 0.5.4.1
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && flag(FastCompile)
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
@@ -163,7 +163,7 @@ Executable fltkhs-doublebuffer
     fltkhs >= 0.5.4.1
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && flag(FastCompile)
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
@@ -181,7 +181,7 @@ Executable fltkhs-make-tree
     fltkhs >= 0.5.4.1
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && flag(FastCompile)
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
@@ -200,7 +200,7 @@ Executable fltkhs-tree-simple
     text >= 0.2 && < 1.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && flag(FastCompile)
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
@@ -219,7 +219,7 @@ Executable fltkhs-table-spreadsheet-with-keyboard-nav
     text >= 0.2 && < 1.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && flag(FastCompile)
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
@@ -238,7 +238,7 @@ Executable fltkhs-table-simple
     text >= 0.2 && < 1.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && flag(FastCompile)
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
@@ -258,7 +258,7 @@ Executable fltkhs-table-sort
     process
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && flag(FastCompile)
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
@@ -277,7 +277,7 @@ Executable fltkhs-arc
     text >= 0.2 && < 1.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && flag(FastCompile)
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
@@ -296,7 +296,7 @@ Executable fltkhs-bitmap
      bytestring
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && flag(FastCompile)
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
@@ -316,7 +316,7 @@ Executable fltkhs-boxtype
      text >= 0.2 && < 1.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && flag(FastCompile)
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
@@ -336,7 +336,7 @@ Executable fltkhs-browser
      text >= 0.2 && < 1.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && flag(FastCompile)
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
@@ -355,7 +355,7 @@ Executable fltkhs-clock
      bytestring
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && flag(FastCompile)
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
      ghc-Options: -optl-mwindows
@@ -374,13 +374,13 @@ Executable fltkhs-fd-example
     src/Examples/PopenShim.c
   Build-Depends:
      base == 4.*,
-     fltkhs >= 0.5.4.1,
+     fltkhs >= 0.5.4.3,
      process >= 1.2.1.0,
      bytestring,
      text >= 0.2 && < 1.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && flag(FastCompile)
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
@@ -395,11 +395,11 @@ Executable fltkhs-howto-drag-and-drop
   Hs-Source-Dirs: src/Examples
   Build-Depends:
      base == 4.*,
-     fltkhs >= 0.5.4.1,
+     fltkhs >= 0.5.4.3,
      text >= 0.2 && < 1.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && flag(FastCompile)
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
      ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
   if os(windows)
    ghc-Options: -optl-mwindows
