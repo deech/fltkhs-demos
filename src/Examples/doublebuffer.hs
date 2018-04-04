@@ -87,7 +87,7 @@ main = do
   setColor w2 blackColor
   setResizable w2 (Just w2)
   begin w2
-  slider1 <- horSliderNew (toRectangle $ (20,370,360,25)) Nothing
+  slider1 <- horSliderNew (toRectangle (20,370,360,25)) Nothing
   range slider1 2 30
   setStep slider1 1
   _ <- readIORef sides' >>= setValue slider1 . fst
