@@ -46,11 +46,11 @@ drawCell table context (TableCoordinate (Row row) (Column col)) rectangle = do
 initializeTable :: Ref Table -> IO ()
 initializeTable table = do
   begin table
-  setRows table maxRows
+  setRows table (Rows maxRows)
   setRowHeader table True
   setRowHeightAll table 20
   setRowResize table False
-  setCols table maxCols
+  setCols table (Columns maxCols)
   setColHeader table True
   setColWidthAll table 80
   setColResize table True

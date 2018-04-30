@@ -49,14 +49,14 @@ drawSortArrow (Rectangle (Position (X x') (Y y')) (Size (Width w') (Height h')))
    then do
      flcSetColor whiteColor
      flcLine (Position (X xrit) (Y ytop)) (Position (X xctr) (Y ybot))
-     flcSetColorWithC 41
+     flcSetColor (Color 41)
      flcLine (Position (X xlft) (Y ytop)) (Position (X xrit) (Y ytop))
      flcLine (Position (X xlft) (Y ytop)) (Position (X xctr) (Y ybot))
    else do
      flcSetColor whiteColor
      flcLine (Position (X xrit) (Y ybot)) (Position (X xctr) (Y ybot))
      flcLine (Position (X xrit) (Y ybot)) (Position (X xlft) (Y ybot))
-     flcSetColorWithC 41
+     flcSetColor (Color 41)
      flcLine (Position (X xlft) (Y ybot)) (Position (X xctr) (Y ytop))
 
 drawCell ::  TableState -> Ref TableRow -> TableContext -> TableCoordinate -> Rectangle -> IO ()
@@ -66,8 +66,8 @@ drawCell tableState table tc (TableCoordinate (Row row') (Column col')) rectangl
     sortReverse' <- readIORef (sortReverse tableState)
     sortLastCol' <- readIORef (sortLastCol tableState)
     rowData' <- readIORef (rowData tableState)
-    numCols <- getCols table
-    numRows <- getRows table
+    (Columns numCols) <- getCols table
+    (Rows numRows) <- getRows table
     if (row' < numRows && col' < numCols)
       then case tc of
             ContextColHeader -> do
@@ -90,7 +90,7 @@ drawCell tableState table tc (TableCoordinate (Row row') (Column col')) rectangl
             ContextCell -> do
               flcPushClip rectangle'
               bgColor <- do
-                isSelected' <- getRowSelected table row'
+                isSelected' <- getRowSelected table (Row row')
                 case isSelected' of
                   Right is' -> if is'
                                then getSelectionColor table
@@ -190,7 +190,7 @@ autowidth table pad rowData' = do
 resize_window :: Ref DoubleWindow -> Ref TableRow -> IO ()
 resize_window window table = do
   let width = (4 :: Int)
-  numCols <- getCols table
+  (Columns numCols) <- getCols table
   colWidthTotal <- liftM sum $ mapM (getColWidth table . Column) [0..(numCols - 1)]
   let totalWidth = width + colWidthTotal + (margin * 2)
   appWidth <- FL.w
@@ -230,8 +230,8 @@ main = do
   setColResize table True
   setSelectionColor table yellowColor
   setWhen table [WhenRelease]
-  readIORef rowData' >>= setRows table . length
-  readIORef rowData' >>= setCols table . maximum . map length
+  readIORef rowData' >>= setRows table . Rows . length
+  readIORef rowData' >>= setCols table . Columns . maximum . map length
   setRowHeightAll table 18
   readIORef rowData' >>= autowidth table 20
   setTooltip table "Click on column headings to toggle column sorting"

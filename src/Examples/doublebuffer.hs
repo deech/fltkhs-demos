@@ -44,7 +44,7 @@ drawWindow sides' whichf' w' = do
   ww' <- getW w'
   wh' <- getH w'
   badDraw sides' ww' wh' whichf'
-  c' <- getChild w' (0 :: Int)
+  c' <- getChild w' (AtIndex 0)
   maybe (return ()) (drawChild w') (c' :: Maybe (Ref Widget))
 
 main :: IO ()

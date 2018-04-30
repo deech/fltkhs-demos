@@ -19,8 +19,8 @@ type Fl_Socket = CInt
 pingCommand = "ping -i 2 -c 10 localhost"
 #endif
 
-handleFD :: Ptr () -> Ref Browser -> Fl_Socket -> IO ()
-handleFD stream b fd =
+handleFD :: Ptr () -> Ref Browser -> FlSocket -> IO ()
+handleFD stream b (FlSocket fd) =
   getLineShim stream >>= maybe atEOF (add b)
   where
     atEOF = do
