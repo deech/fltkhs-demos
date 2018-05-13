@@ -36,17 +36,17 @@ drawArc myArgsRef widget = do
   flcTranslate (ByXY (ByX (fromIntegral x')) (ByY (fromIntegral $ y')))
   flcBeginComplexPolygon
   flcArcByRadius
-    (ByXY (ByX $ myArgs !! 0) (ByY $ myArgs !! 1))
+    (PrecisePosition (PreciseX $ myArgs !! 0) (PreciseY $ myArgs !! 1))
     (myArgs !! 2)
     (PreciseAngle (myArgs !! 3))
     (PreciseAngle (myArgs !! 4))
   flcGap
-  flcArcByRadius (ByXY (ByX 140) (ByY 140)) 20 (PreciseAngle 0) (PreciseAngle (-360))
+  flcArcByRadius (PrecisePosition (PreciseX 140) (PreciseY 140)) 20 (PreciseAngle 0) (PreciseAngle (-360))
   flcEndComplexPolygon
   flcSetColor redColor
   flcBeginLine
   flcArcByRadius
-    (ByXY (ByX $ myArgs !! 0) (ByY $ myArgs !! 1))
+    (PrecisePosition (PreciseX $ myArgs !! 0) (PreciseY $ myArgs !! 1))
     (myArgs !! 2)
     (PreciseAngle (myArgs !! 3))
     (PreciseAngle (myArgs !! 4))

@@ -55,10 +55,7 @@ main = do
   -- from the borders of the Fl_Tile widget
   let dx = 20
   let dy = 20
-  tileX <- getX tile
-  tileY <- getY tile
-  tileW <- getW tile
-  tileH <- getH tile
+  (tileX, tileY, tileW, tileH) <- fmap fromRectangle (getRectangle tile)
   r <- boxNew (toRectangle ((tileX+dx), (tileY+dy), (tileW-(2*dx)), (tileH-(2*dy)))) Nothing
   _ <- setResizable tile (Just r)
   end tile

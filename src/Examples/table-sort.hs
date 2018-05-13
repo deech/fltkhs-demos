@@ -164,7 +164,7 @@ autowidth table pad rowData' = do
   flcSetFont headerFontFace headerFontSize
   mapM_
     (\(colNum, colName) -> do
-        (Size (Width w') _) <- flcMeasure colName True True
+        (Size (Width w') _) <- flcMeasure colName Nothing True
         setColWidth table (Column colNum) (w' + pad)
     )
     (zip [0 ..] dirHeaders)
@@ -173,7 +173,7 @@ autowidth table pad rowData' = do
     (\row' -> do
       mapM_
         (\(colIdx,col) -> do
-            (Size (Width wc') _) <- flcMeasure col True True
+            (Size (Width wc') _) <- flcMeasure col Nothing True
             colWidth' <- getColWidth table (Column colIdx)
             if (wc' + pad > colWidth')
               then setColWidth table (Column colIdx) (wc' + pad)
@@ -197,9 +197,7 @@ resize_window window table = do
   if (totalWidth < 200 || totalWidth > appWidth)
     then return ()
     else do
-      x' <- getX window
-      y' <- getY window
-      h' <- getH window
+      (x', y', h', _) <- fmap fromRectangle (getRectangle window)
       resize window $ toRectangle (x',y',totalWidth,h')
 
 main :: IO ()
@@ -208,8 +206,8 @@ main = do
               (Size (Width 900) (Height 500))
               Nothing
               (Just "Table Sorting")
-  windowW <- getW window
-  windowH <- getH window
+  (Width windowW) <- getW window
+  (Height windowH) <- getH window
   rows <- uncurry readProcess dirCommand "" >>= return . map T.words . T.lines . T.pack
   rowData' <- newIORef rows
   sortReverse' <- newIORef False

@@ -51,6 +51,7 @@ main = do
                    handleCustom = (Just senderHandler)
                }))
   setBox a FlatBox
+  setLabelsize a (FontSize 12)
   setColor a (Color 10)
   setLabel a ("Drag\nfrom\nhere..")
   end winA
@@ -68,6 +69,7 @@ main = do
                   handleCustom = (Just receiverHandler)
                 }))
   setBox b FlatBox
+  setLabelsize b (FontSize 12)
   setColor b (Color 9)
   setLabel b ("...to\nhere")
   end winB

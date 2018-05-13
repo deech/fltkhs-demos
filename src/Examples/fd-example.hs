@@ -3,12 +3,12 @@
 module Main where
 import qualified Graphics.UI.FLTK.LowLevel.FL as FL
 import Graphics.UI.FLTK.LowLevel.Fl_Types
-import Graphics.UI.FLTK.LowLevel.FLTKHS
 import Graphics.UI.FLTK.LowLevel.Utils
 import Foreign.C.String
 import Foreign.C.Types
 import Foreign.Ptr
 import Foreign.Marshal.Alloc
+import Graphics.UI.FLTK.LowLevel.FLTKHS
 import qualified Data.Text as T
 pingCommand :: T.Text
 #ifdef mingw32_HOST_OS

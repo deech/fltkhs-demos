@@ -95,8 +95,8 @@ initializeTable t = do
 main :: IO ()
 main = do
   win <- doubleWindowNew (toSize (940,500)) Nothing (Just "table as container")
-  win_w <- getW win
-  win_h <- getH win
+  (Width win_w) <- getW win
+  (Height win_h) <- getH win
   begin win
   table <- tableCustom
             (toRectangle (20,20,win_w-40,win_h-40))

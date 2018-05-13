@@ -25,8 +25,8 @@ main = do
   _ <- FL.setScheme "gtk+"
   window <- windowNew (toSize (250,400)) Nothing (Just "Simple Tree")
   begin window
-  windowWidth' <- getW window
-  windowHeight' <- getH window
+  (Width windowWidth') <- getW window
+  (Height windowHeight') <- getH window
   tree <- treeNew (toRectangle (10,10,windowWidth' - 20,windowHeight' - 20)) Nothing
   setShowroot tree False
   _ <- add tree "Flintstones/Fred"

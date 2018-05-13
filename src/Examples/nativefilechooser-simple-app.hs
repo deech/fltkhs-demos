@@ -67,10 +67,10 @@ initializeWindow w' = do
   _ <- add menu "&File/&Save" (Just (KeySequence (ShortcutKeySequence [kb_CommandState] (NormalKeyType 's')))) (Just (saveCb chooser)) (MenuItemFlags [])
   _ <- add menu "&File/&Save As" Nothing (Just (saveAsCb chooser)) (MenuItemFlags [])
   _ <- add menu "&File/&Quit" (Just (KeySequence (ShortcutKeySequence [kb_CommandState] (NormalKeyType 'q')))) (Just quitCb) (MenuItemFlags [])
-  w_w' <- getW w'
-  w_h' <- getH w'
+  (Width w_w') <- getW w'
+  (Height w_h') <- getH w'
   box' <- boxNew (toRectangle (20,25+20,w_w'-40,w_h'-40-25)) Nothing
-  setColor box' (Color 45)
+  setColor box' whiteColor
   setBox box' FlatBox
   setAlign box' (Alignments [AlignTypeCenter, AlignTypeInside, AlignTypeWrap])
   setLabel box' $ "This demo shows an example of implementing " `T.append`

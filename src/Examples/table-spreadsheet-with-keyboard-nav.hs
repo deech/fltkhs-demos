@@ -31,7 +31,7 @@ setIndex idx' f xs =
    )
    (zip [0..] xs)
 
-setValueHide :: IORef SpreadsheetProperties -> Ref Table -> Ref IntInput -> IO ()
+setValueHide :: IORef SpreadsheetProperties -> Ref Table -> Ref Input -> IO ()
 setValueHide sp' table' intInput' = do
   props' <- readIORef sp'
   inputValue' <- getValue intInput' >>= return . read . T.unpack
@@ -49,7 +49,7 @@ setValueHide sp' table' intInput' = do
   window' <- getWindow table'
   maybe (return ()) (\w' -> setCursor w' CursorDefault ) window'
 
-startEditing :: IORef SpreadsheetProperties -> Ref IntInput -> Ref Table -> TableCoordinate -> IO ()
+startEditing :: IORef SpreadsheetProperties -> Ref Input -> Ref Table -> TableCoordinate -> IO ()
 startEditing props' intInput' table' (TableCoordinate (Row row') (Column col')) = do
   modifyIORef props' (\p' -> p' {rowEdit = row', colEdit = col'})
   _p <- readIORef props'
@@ -68,7 +68,7 @@ startEditing props' intInput' table' (TableCoordinate (Row row') (Column col')) 
       return ()
     _ -> return ()
 
-doneEditing :: IORef SpreadsheetProperties -> Ref IntInput -> Ref Table -> IO ()
+doneEditing :: IORef SpreadsheetProperties -> Ref Input -> Ref Table -> IO ()
 doneEditing props' intInput' table' = do
   _p <- readIORef props'
   visible' <- getVisible intInput'
@@ -76,7 +76,7 @@ doneEditing props' intInput' table' = do
    then setValueHide props' table' intInput'
    else return ()
 
-eventCallback :: IORef SpreadsheetProperties -> Ref IntInput -> Ref Table -> IO ()
+eventCallback :: IORef SpreadsheetProperties -> Ref Input -> Ref Table -> IO ()
 eventCallback props' intInput' table' = do
   _p <- readIORef props'
   (Row r') <- callbackRow table'
@@ -132,7 +132,7 @@ setRowsCb table' slider' = do
   setRows table' (Rows (truncate (v' + 1)))
   redraw table'
 
-drawCell :: IORef SpreadsheetProperties -> Ref IntInput -> Ref Table -> TableContext -> TableCoordinate -> Rectangle -> IO ()
+drawCell :: IORef SpreadsheetProperties -> Ref Input -> Ref Table -> TableContext -> TableCoordinate -> Rectangle -> IO ()
 drawCell props' intInput' table' context' (TableCoordinate (Row row') (Column col')) rectangle' = do
   _p <- readIORef props'
   (Rows numRows') <- getRows table'
@@ -214,8 +214,8 @@ main = do
            (Size (Width 922) (Height 382))
            Nothing
            (Just "Fl_Table Spreadsheet with Keyboard Navigation")
-  winWidth' <- getW win'
-  winHeight' <- getH win'
+  (Width winWidth') <- getW win'
+  (Height winHeight') <- getH win'
   let values' =
         map
           (\r' ->
@@ -233,7 +233,7 @@ main = do
                 values'
   let tableWidth' = winWidth' - 80
       tableHeight' = winHeight' - 80
-  intInput' <- intInputNew
+  intInput' <- inputNew
                 (toRectangle
                  (
                   (truncate $ ((fromIntegral tableWidth' / 2) :: Double)),
@@ -243,6 +243,7 @@ main = do
                  )
                 )
                 Nothing
+                (Just FlIntInput)
   hide intInput'
   setWhen intInput' [WhenEnterKeyAlways]
   setMaximumSize intInput' 5

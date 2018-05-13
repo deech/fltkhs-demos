@@ -48,7 +48,7 @@ bCb browser' = do
   clicks <- FL.eventClicks
   putStrLn ("callback, selection = " ++ (show lineNumber) ++ " eventClicks = " ++ (show clicks))
 
-showCb :: CallbackType -> Ref IntInput -> Ref SelectBrowser -> IO ()
+showCb :: CallbackType -> Ref Input -> Ref SelectBrowser -> IO ()
 showCb buttontype' field' browser' = do
   line' <- getValue field'
   if (T.null line')
@@ -103,7 +103,7 @@ main = do
        Left _ -> print ("Can't load " ++ T.unpack fname)
        _ -> do
          setPosition browser' (PixelPosition 0)
-         field <- intInputNew (toRectangle (55,350,505,25)) (Just "Line #:")
+         field <- inputNew (toRectangle (55,350,505,25)) (Just "Line #:") (Just FlIntInput)
          setCallback field (\_ -> showCb Browser field browser')
          top' <- buttonNew (toRectangle (0,375,80,25)) (Just "Top")
          setCallback top' (\_ -> showCb Top field browser')

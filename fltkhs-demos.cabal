@@ -87,6 +87,7 @@ Executable fltkhs-nativefilechooser-simple-app
     base == 4.*,
     directory,
     fltkhs >= 0.5.4.1,
+    fltkhs-themes >= 0.1.0.0,
     text >= 0.2 && < 1.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
@@ -160,6 +161,7 @@ Executable fltkhs-doublebuffer
   Hs-Source-Dirs: src/Examples
   Build-Depends:
     base == 4.*,
+    fltkhs-themes >= 0.1.0.0,
     fltkhs >= 0.5.4.1
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
@@ -197,6 +199,7 @@ Executable fltkhs-tree-simple
   Build-Depends:
     base == 4.*,
     fltkhs >= 0.5.4.1,
+    fltkhs-themes >= 0.1.0.0,
     text >= 0.2 && < 1.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
@@ -274,6 +277,7 @@ Executable fltkhs-arc
   Build-Depends:
     base == 4.*,
     fltkhs >= 0.5.4.1,
+    fltkhs-themes >= 0.1.0.0,
     text >= 0.2 && < 1.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
@@ -293,6 +297,7 @@ Executable fltkhs-bitmap
   Build-Depends:
      base == 4.*,
      fltkhs >= 0.5.4.1,
+     fltkhs-themes >= 0.1.0.0,
      bytestring
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
@@ -312,6 +317,7 @@ Executable fltkhs-boxtype
   Build-Depends:
      base == 4.*,
      fltkhs >= 0.5.4.1,
+     fltkhs-themes >= 0.1.0.0,
      bytestring,
      text >= 0.2 && < 1.3
   default-language: Haskell2010
@@ -332,6 +338,7 @@ Executable fltkhs-browser
   Build-Depends:
      base == 4.*,
      fltkhs >= 0.5.4.1,
+     fltkhs-themes >= 0.1.0.0,
      bytestring,
      text >= 0.2 && < 1.3
   default-language: Haskell2010
@@ -352,6 +359,7 @@ Executable fltkhs-clock
   Build-Depends:
      base == 4.*,
      fltkhs >= 0.5.4.1,
+     fltkhs-themes >= 0.1.0.0,
      bytestring
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
@@ -377,6 +385,7 @@ Executable fltkhs-fd-example
      fltkhs >= 0.5.4.3,
      process >= 1.2.1.0,
      bytestring,
+     fltkhs-themes >= 0.1.0.0,
      text >= 0.2 && < 1.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
@@ -396,6 +405,7 @@ Executable fltkhs-howto-drag-and-drop
   Build-Depends:
      base == 4.*,
      fltkhs >= 0.5.4.3,
+     fltkhs-themes >= 0.1.0.0,
      text >= 0.2 && < 1.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
