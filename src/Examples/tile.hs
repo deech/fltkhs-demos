@@ -10,11 +10,11 @@ main = do
   setBox window NoBox
   _ <- setResizable window (Just window)
   tile <- tileNew (toRectangle (0,0,300,300)) Nothing
-  box0 <- boxNew (toRectangle (0,0,150,150)) (Just "0")
-  setBox box0 DownBox
-  setColor box0 (Color 9)
-  setLabelsize box0 (FontSize 36)
-  setAlign box0 (Alignments [AlignTypeClip])
+  boxNew (toRectangle (0,0,150,150)) (Just "0") $ do
+    box ?= DownBox
+    color ?= Color 9
+    labelsize ?= FontSize 36
+    align ?= Alignments [AlignTypeClip]
 
   w1 <- doubleWindowNew (Size (Width 150) (Height 150)) (Just (Position (X 150) (Y 0))) Nothing
   begin w1
