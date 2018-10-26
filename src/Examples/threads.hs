@@ -40,14 +40,14 @@ main = do
 
   -- Start the click counter at zero.
   counterRef <- newIORef (0 :: Integer)
-  _ <- setValue counter (T.pack (show (0 :: Integer))) Nothing
+  _ <- setValue counter (T.pack (show (0 :: Integer)))
 
   -- When the button is pressed, increment the counter and update the
   -- label.
   setCallback button $ \_ -> do
     modifyIORef counterRef (+1)
     x <- readIORef counterRef
-    void $ setValue counter (T.pack (show x)) Nothing
+    void $ setValue counter (T.pack (show x))
 
   -- Every so often, check for messages from our worker thread.
   FL.addTimeout 0.025 (tick b c)
@@ -70,7 +70,7 @@ tick b c = do
   where inner x = do
           mx <- atomically $ tryReadTChan c
           case mx of
-            Nothing -> void $ setValue b (T.pack (show x)) Nothing
+            Nothing -> void $ setValue b (T.pack (show x))
             Just x' -> inner x'
 
 

@@ -48,7 +48,7 @@ bCb browser' = do
   clicks <- FL.eventClicks
   putStrLn ("callback, selection = " ++ (show lineNumber) ++ " eventClicks = " ++ (show clicks))
 
-showCb :: CallbackType -> Ref IntInput -> Ref SelectBrowser -> IO ()
+showCb :: CallbackType -> Ref Input -> Ref SelectBrowser -> IO ()
 showCb buttontype' field' browser' = do
   line' <- getValue field'
   if (T.null line')
@@ -99,33 +99,33 @@ main = do
      setType browser' MultiBrowserType
      setCallback browser' bCb
      loadStatus' <- load browser' fname
-     if (loadStatus' == 0)
-       then print ("Can't load " ++ T.unpack fname)
-       else do
-       setPosition browser' (PixelPosition 0)
-       field <- intInputNew (toRectangle (55,350,505,25)) (Just "Line #:")
-       setCallback field (\_ -> showCb Browser field browser')
-       top' <- buttonNew (toRectangle (0,375,80,25)) (Just "Top")
-       setCallback top' (\_ -> showCb Top field browser')
-       bottom' <- buttonNew (toRectangle (80,375,80,25)) (Just "Bottom")
-       setCallback bottom' (\_ -> showCb Bottom field browser')
-       middle' <- buttonNew (toRectangle (160,375,80,25)) (Just "Middle")
-       setCallback middle' (\_ -> showCb Middle field browser')
-       visible' <- buttonNew (toRectangle (240,375,80,25)) (Just "Make Vis.")
-       setCallback visible' (\_ -> showCb Visible field browser')
-       swap' <- buttonNew (toRectangle (320,375,80,25)) (Just "Swap")
-       setCallback swap' $ swapCb browser'
-       setTooltip swap' "Swaps two selected lines\n(Use CTRL-click to select two lines)"
-       sort' <- buttonNew (toRectangle (400,375,80,25)) (Just "Sort")
-       setCallback sort' (sortCb browser')
-       btype <- choiceNew (toRectangle (480,375,80,25)) Nothing
-       addName btype "Normal"
-       addName btype "Select"
-       addName btype "Hold"
-       addName btype "Multi"
-       setCallback btype $ btypeCb browser'
-       _ <- setValue btype (MenuItemByIndex (MenuItemIndex 3))
-       setResizable window (Just browser')
-       showWidget window
-       _ <- FL.run
-       return ()
+     case loadStatus' of
+       Left _ -> print ("Can't load " ++ T.unpack fname)
+       _ -> do
+         setPosition browser' (PixelPosition 0)
+         field <- inputNew (toRectangle (55,350,505,25)) (Just "Line #:") (Just FlIntInput)
+         setCallback field (\_ -> showCb Browser field browser')
+         top' <- buttonNew (toRectangle (0,375,80,25)) (Just "Top")
+         setCallback top' (\_ -> showCb Top field browser')
+         bottom' <- buttonNew (toRectangle (80,375,80,25)) (Just "Bottom")
+         setCallback bottom' (\_ -> showCb Bottom field browser')
+         middle' <- buttonNew (toRectangle (160,375,80,25)) (Just "Middle")
+         setCallback middle' (\_ -> showCb Middle field browser')
+         visible' <- buttonNew (toRectangle (240,375,80,25)) (Just "Make Vis.")
+         setCallback visible' (\_ -> showCb Visible field browser')
+         swap' <- buttonNew (toRectangle (320,375,80,25)) (Just "Swap")
+         setCallback swap' $ swapCb browser'
+         setTooltip swap' "Swaps two selected lines\n(Use CTRL-click to select two lines)"
+         sort' <- buttonNew (toRectangle (400,375,80,25)) (Just "Sort")
+         setCallback sort' (sortCb browser')
+         btype <- choiceNew (toRectangle (480,375,80,25)) Nothing
+         addName btype "Normal"
+         addName btype "Select"
+         addName btype "Hold"
+         addName btype "Multi"
+         setCallback btype $ btypeCb browser'
+         _ <- setValue btype (MenuItemByIndex (AtIndex 3))
+         setResizable window (Just browser')
+         showWidget window
+         _ <- FL.run
+         return ()

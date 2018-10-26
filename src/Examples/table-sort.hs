@@ -49,14 +49,14 @@ drawSortArrow (Rectangle (Position (X x') (Y y')) (Size (Width w') (Height h')))
    then do
      flcSetColor whiteColor
      flcLine (Position (X xrit) (Y ytop)) (Position (X xctr) (Y ybot))
-     flcSetColorWithC 41
+     flcSetColor (Color 41)
      flcLine (Position (X xlft) (Y ytop)) (Position (X xrit) (Y ytop))
      flcLine (Position (X xlft) (Y ytop)) (Position (X xctr) (Y ybot))
    else do
      flcSetColor whiteColor
      flcLine (Position (X xrit) (Y ybot)) (Position (X xctr) (Y ybot))
      flcLine (Position (X xrit) (Y ybot)) (Position (X xlft) (Y ybot))
-     flcSetColorWithC 41
+     flcSetColor (Color 41)
      flcLine (Position (X xlft) (Y ybot)) (Position (X xctr) (Y ytop))
 
 drawCell ::  TableState -> Ref TableRow -> TableContext -> TableCoordinate -> Rectangle -> IO ()
@@ -66,8 +66,8 @@ drawCell tableState table tc (TableCoordinate (Row row') (Column col')) rectangl
     sortReverse' <- readIORef (sortReverse tableState)
     sortLastCol' <- readIORef (sortLastCol tableState)
     rowData' <- readIORef (rowData tableState)
-    numCols <- getCols table
-    numRows <- getRows table
+    (Columns numCols) <- getCols table
+    (Rows numRows) <- getRows table
     if (row' < numRows && col' < numCols)
       then case tc of
             ContextColHeader -> do
@@ -90,7 +90,7 @@ drawCell tableState table tc (TableCoordinate (Row row') (Column col')) rectangl
             ContextCell -> do
               flcPushClip rectangle'
               bgColor <- do
-                isSelected' <- getRowSelected table row'
+                isSelected' <- getRowSelected table (Row row')
                 case isSelected' of
                   Right is' -> if is'
                                then getSelectionColor table
@@ -164,7 +164,7 @@ autowidth table pad rowData' = do
   flcSetFont headerFontFace headerFontSize
   mapM_
     (\(colNum, colName) -> do
-        (Size (Width w') _) <- flcMeasure colName True True
+        (Size (Width w') _) <- flcMeasure colName Nothing True
         setColWidth table (Column colNum) (w' + pad)
     )
     (zip [0 ..] dirHeaders)
@@ -173,7 +173,7 @@ autowidth table pad rowData' = do
     (\row' -> do
       mapM_
         (\(colIdx,col) -> do
-            (Size (Width wc') _) <- flcMeasure col True True
+            (Size (Width wc') _) <- flcMeasure col Nothing True
             colWidth' <- getColWidth table (Column colIdx)
             if (wc' + pad > colWidth')
               then setColWidth table (Column colIdx) (wc' + pad)
@@ -190,16 +190,14 @@ autowidth table pad rowData' = do
 resize_window :: Ref DoubleWindow -> Ref TableRow -> IO ()
 resize_window window table = do
   let width = (4 :: Int)
-  numCols <- getCols table
+  (Columns numCols) <- getCols table
   colWidthTotal <- liftM sum $ mapM (getColWidth table . Column) [0..(numCols - 1)]
   let totalWidth = width + colWidthTotal + (margin * 2)
   appWidth <- FL.w
   if (totalWidth < 200 || totalWidth > appWidth)
     then return ()
     else do
-      x' <- getX window
-      y' <- getY window
-      h' <- getH window
+      (x', y', h', _) <- fmap fromRectangle (getRectangle window)
       resize window $ toRectangle (x',y',totalWidth,h')
 
 main :: IO ()
@@ -208,8 +206,8 @@ main = do
               (Size (Width 900) (Height 500))
               Nothing
               (Just "Table Sorting")
-  windowW <- getW window
-  windowH <- getH window
+  (Width windowW) <- getW window
+  (Height windowH) <- getH window
   rows <- uncurry readProcess dirCommand "" >>= return . map T.words . T.lines . T.pack
   rowData' <- newIORef rows
   sortReverse' <- newIORef False
@@ -230,8 +228,8 @@ main = do
   setColResize table True
   setSelectionColor table yellowColor
   setWhen table [WhenRelease]
-  readIORef rowData' >>= setRows table . length
-  readIORef rowData' >>= setCols table . maximum . map length
+  readIORef rowData' >>= setRows table . Rows . length
+  readIORef rowData' >>= setCols table . Columns . maximum . map length
   setRowHeightAll table 18
   readIORef rowData' >>= autowidth table 20
   setTooltip table "Click on column headings to toggle column sorting"

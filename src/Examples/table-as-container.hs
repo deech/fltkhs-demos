@@ -14,8 +14,8 @@ buttonCb lightButton = do
 setTableSize :: Ref Table -> Int -> Int -> IO ()
 setTableSize t' nr' nc' = do
   clear t'
-  setRows t' nr'
-  setCols t' nc'
+  setRows t' (Rows nr')
+  setCols t' (Columns nc')
   begin t'
   let (rowCols :: [(Int,Int)]) = [(r',c') | r' <- [0..(nr'-1)], c' <- [0..(nc'-1)]]
   mapM_
@@ -27,7 +27,7 @@ setTableSize t' nr' nc' = do
            then do
             let s = T.pack ((show _r) ++ "." ++ (show _c))
             input_ <- inputNew cellRectangle' Nothing Nothing
-            _ <- setValue input_ s Nothing
+            _ <- setValue input_ s
             return ()
            else
              do
@@ -47,19 +47,19 @@ drawCell t' tcontext' (TableCoordinate (Row tr') (Column tc')) r' =
   case tcontext' of
     ContextStartPage -> flcSetFont helvetica (FontSize 12)
     ContextRCResize -> do
-      rows' <- getRows t'
-      cols' <- getCols t'
-      let (rowCols :: [(Int,Int)]) = [(_r,_c) | _r <- [0..(rows'-1)], _c <- [0..(cols'-1)]]
+      (Rows rows') <- getRows t'
+      (Columns cols') <- getCols t'
+      let (rowCols :: [TableCoordinate]) = [(TableCoordinate (Row _r) (Column _c)) | _r <- [0..(rows'-1)], _c <- [0..(cols'-1)]]
       mapM_
-        (\((i::Int), (_r',_c')) -> do
+        (\((i::Int), tc) -> do
             children' <- children t'
             if (i >= children')
               then return ()
               else do
-                cellRectangle <- findCell t' ContextTable (TableCoordinate (Row _r') (Column _c'))
+                cellRectangle <- findCell t' ContextTable tc
                 case cellRectangle of
                   Just cellRectangle' -> do
-                   child' <- getChild t' i
+                   child' <- getChild t' (AtIndex i)
                    maybe (return ()) (\c -> resize c cellRectangle') child'
                   Nothing -> return ()
         )
@@ -95,8 +95,8 @@ initializeTable t = do
 main :: IO ()
 main = do
   win <- doubleWindowNew (toSize (940,500)) Nothing (Just "table as container")
-  win_w <- getW win
-  win_h <- getH win
+  (Width win_w) <- getW win
+  (Height win_h) <- getH win
   begin win
   table <- tableCustom
             (toRectangle (20,20,win_w-40,win_h-40))

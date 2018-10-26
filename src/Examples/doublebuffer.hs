@@ -18,8 +18,8 @@ star w h n = do
       let i_vertex :: Double =  2 * pi * i/n + 0.1
           j_vertex :: Double =  2 * pi * j/n + 0.1
       flcBeginLine
-      flcVertex (ByXY (ByX $ cos i_vertex) (ByY $ sin i_vertex))
-      flcVertex (ByXY (ByX $ cos j_vertex) (ByY $ sin j_vertex))
+      flcVertex (PrecisePosition (PreciseX $ cos i_vertex) (PreciseY $ sin i_vertex))
+      flcVertex (PrecisePosition (PreciseX $ cos j_vertex) (PreciseY $ sin j_vertex))
       flcEndLine
   flcPopMatrix
 
@@ -41,10 +41,10 @@ drawWindow :: IORef (Double, Double) ->
               Ref Window ->
               IO ()
 drawWindow sides' whichf' w' = do
-  ww' <- getW w'
-  wh' <- getH w'
+  (Width ww') <- getW w'
+  (Height wh') <- getH w'
   badDraw sides' ww' wh' whichf'
-  c' <- getChild w' (0 :: Int)
+  c' <- getChild w' (AtIndex 0)
   maybe (return ()) (drawChild w') (c' :: Maybe (Ref Widget))
 
 main :: IO ()

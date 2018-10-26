@@ -26,7 +26,7 @@ drawArc myArgsRef widget = do
       (ByXY
        (ByX ((fromIntegral x') + (fromIntegral w')/2))
        (ByY ((fromIntegral y') + (fromIntegral h')/2)))
-    flcRotate (myArgs !! 5)
+    flcRotate (PreciseAngle (myArgs !! 5))
     flcTranslate
       (ByXY
        (ByX (-((fromIntegral x') + (fromIntegral w')/2)))
@@ -36,20 +36,20 @@ drawArc myArgsRef widget = do
   flcTranslate (ByXY (ByX (fromIntegral x')) (ByY (fromIntegral $ y')))
   flcBeginComplexPolygon
   flcArcByRadius
-    (ByXY (ByX $ myArgs !! 0) (ByY $ myArgs !! 1))
+    (PrecisePosition (PreciseX $ myArgs !! 0) (PreciseY $ myArgs !! 1))
     (myArgs !! 2)
-    (myArgs !! 3)
-    (myArgs !! 4)
+    (PreciseAngle (myArgs !! 3))
+    (PreciseAngle (myArgs !! 4))
   flcGap
-  flcArcByRadius (ByXY (ByX 140) (ByY 140)) 20 0 (-360)
+  flcArcByRadius (PrecisePosition (PreciseX 140) (PreciseY 140)) 20 (PreciseAngle 0) (PreciseAngle (-360))
   flcEndComplexPolygon
   flcSetColor redColor
   flcBeginLine
   flcArcByRadius
-    (ByXY (ByX $ myArgs !! 0) (ByY $ myArgs !! 1))
+    (PrecisePosition (PreciseX $ myArgs !! 0) (PreciseY $ myArgs !! 1))
     (myArgs !! 2)
-    (myArgs !! 3)
-    (myArgs !! 4)
+    (PreciseAngle (myArgs !! 3))
+    (PreciseAngle (myArgs !! 4))
   flcEndLine
   flcPopMatrix
   flcPopClip

@@ -3,12 +3,12 @@
 module Main where
 import qualified Graphics.UI.FLTK.LowLevel.FL as FL
 import Graphics.UI.FLTK.LowLevel.Fl_Types
-import Graphics.UI.FLTK.LowLevel.FLTKHS
 import Graphics.UI.FLTK.LowLevel.Utils
 import Foreign.C.String
 import Foreign.C.Types
 import Foreign.Ptr
 import Foreign.Marshal.Alloc
+import Graphics.UI.FLTK.LowLevel.FLTKHS
 import qualified Data.Text as T
 pingCommand :: T.Text
 #ifdef mingw32_HOST_OS
@@ -19,8 +19,8 @@ type Fl_Socket = CInt
 pingCommand = "ping -i 2 -c 10 localhost"
 #endif
 
-handleFD :: Ptr () -> Ref Browser -> Fl_Socket -> IO ()
-handleFD stream b fd =
+handleFD :: Ptr () -> Ref Browser -> FlSocket -> IO ()
+handleFD stream b (FlSocket fd) =
   getLineShim stream >>= maybe atEOF (add b)
   where
     atEOF = do
