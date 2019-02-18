@@ -14,7 +14,7 @@ senderHandler _ e =
     -- do 'copy/dnd' when someone clicks on box
     Push -> do
       let message = "It works!"
-      _ <- FL.copy message (T.length message)
+      _ <- FL.copyToClipboard message
       _ <- FL.dnd
       return (Right ())
     e' |   e' == Enter
