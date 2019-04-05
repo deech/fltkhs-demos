@@ -38,14 +38,14 @@ badDraw sides w h which' = do
 
 drawWindow :: IORef (Double, Double) ->
               ((Double, Double) -> Double) ->
-              Ref Window ->
+              Ref WindowBase ->
               IO ()
 drawWindow sides' whichf' w' = do
   (Width ww') <- getW w'
   (Height wh') <- getH w'
   badDraw sides' ww' wh' whichf'
   c' <- getChild w' (AtIndex 0)
-  maybe (return ()) (drawChild w') (c' :: Maybe (Ref Widget))
+  maybe (return ()) (drawChild w') (c' :: Maybe (Ref WidgetBase))
 
 main :: IO ()
 main = do

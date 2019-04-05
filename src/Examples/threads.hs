@@ -66,7 +66,8 @@ tick b c = do
   case mx of
     Nothing -> return ()
     Just x -> inner x
-  FL.repeatTimeout 0.025 (tick b c)
+  _ <- FL.repeatTimeout 0.025 (tick b c)
+  return ()
   where inner x = do
           mx <- atomically $ tryReadTChan c
           case mx of
