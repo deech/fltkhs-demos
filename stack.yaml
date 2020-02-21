@@ -1,6 +1,6 @@
 flags: {}
 packages:
 - '.'
-resolver: lts-12.26
+resolver: lts-15.0
 extra-deps:
-- fltkhs-0.8.0.0
+- fltkhs-0.8.0.3

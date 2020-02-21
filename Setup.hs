@@ -2,6 +2,7 @@
 module Main (main) where
 
 import Distribution.Simple
+import Distribution.Simple.Setup
 import Distribution.Simple.Program
 import Distribution.Simple.LocalBuildInfo
 import Distribution.PackageDescription
@@ -29,14 +30,14 @@ _PackageName = PackageName
 main :: IO ()
 main = defaultMainWithHooks (simpleUserHooks { buildHook = myBuildHook })
 
+myBuildHook :: PackageDescription -> LocalBuildInfo -> UserHooks -> BuildFlags -> IO ()
 myBuildHook pkg_descr local_bld_info user_hooks bld_flags =
-  let fltkhsDependency = lookupDependency (installedPkgs local_bld_info) (Dependency (_PackageName "fltkhs") anyVersion)
+  let fltkhsDependency = lookupDependency (installedPkgs local_bld_info) (_PackageName "fltkhs") anyVersion
       keepBuilding = (buildHook simpleUserHooks) pkg_descr local_bld_info user_hooks bld_flags
   in
-  case fltkhsDependency of
+  case fmap snd fltkhsDependency of
     [] -> keepBuilding
-    (_,[]):_ -> keepBuilding
-    (_, (packageInfo:_)):_ ->
+    (packageInfo:_):_ ->
        mapM_ (updateEnv "LIBRARY_PATH") (libraryDirs packageInfo) >>
        keepBuilding
 
