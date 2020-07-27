@@ -11,365 +11,194 @@ homepage: http://github.com/deech/fltkhs-demos
 -- bug-reports:
 -- copyright:
 category: UI,Graphics
-build-type: Custom
+build-type: Simple
+
 cabal-version: >=2.0
+
 source-repository head
   type: git
   location: http://github.com/deech/fltkhs-demos
-
-custom-setup
-  setup-depends:
-      Cabal >=2.4.0.0 && <4
-    , base >=4.4
-    , filepath
-
-Flag FastCompile
-   Description: Turn off optimizations for faster compilation
-   Manual: True
-   Default: True
 
 Executable fltkhs-threads
   Main-Is: threads.hs
   Hs-Source-Dirs: src/Examples
   Build-Depends:
-     base == 4.*,
+     base >= 4.14 && < 5,
      fltkhs >= 0.8.0.3,
      stm,
      text >= 1.2.2.0
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
-   ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
-  if os(darwin)
-   ghc-Options: "-optl-Wl,-lfltkc"
-  if !os(darwin) && !os(windows)
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
 Executable fltkhs-pack
   Main-Is: pack.hs
   Hs-Source-Dirs: src/Examples
   Build-Depends:
-    base == 4.*,
+    base >= 4.14 && < 5,
     directory >= 1.2.1.0,
     fltkhs >= 0.8.0.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
-   ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
-  if os(darwin)
-   ghc-Options: "-optl-Wl,-lfltkc"
-  if !os(darwin) && !os(windows)
-    ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
 Executable fltkhs-tile
   Main-Is: tile.hs
   Hs-Source-Dirs: src/Examples
   Build-Depends:
-    base == 4.*,
+    base >= 4.14 && < 5,
     directory,
     fltkhs >= 0.8.0.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
-   ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
-  if os(darwin)
-   ghc-Options: "-optl-Wl,-lfltkc"
-  if !os(darwin) && !os(windows)
-    ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
 Executable fltkhs-nativefilechooser-simple-app
   Main-Is: nativefilechooser-simple-app.hs
   Hs-Source-Dirs: src/Examples
   Build-Depends:
-    base == 4.*,
+    base >= 4.14 && < 5,
     directory,
     fltkhs >= 0.8.0.3,
     text >= 1.2.2.0
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
-     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
-  if os(darwin)
-   ghc-Options: "-optl-Wl,-lfltkc"
-  if !os(darwin) && !os(windows)
-    ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
 Executable fltkhs-table-as-container
   Main-Is: table-as-container.hs
   Hs-Source-Dirs: src/Examples
   Build-Depends:
-    base == 4.*,
+    base >= 4.14 && < 5,
     fltkhs >= 0.8.0.3,
     text >= 1.2.2.0
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
-     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
-  if os(darwin)
-   ghc-Options: "-optl-Wl,-lfltkc"
-  if !os(darwin) && !os(windows)
-    ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
 Executable fltkhs-texteditor-simple
   Main-Is: texteditor-simple.hs
   Hs-Source-Dirs: src/Examples
   Build-Depends:
-    base == 4.*,
+    base >= 4.14 && < 5,
     fltkhs >= 0.8.0.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
-     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
-  if os(darwin)
-   ghc-Options: "-optl-Wl,-lfltkc"
-  if !os(darwin) && !os(windows)
-    ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
 Executable fltkhs-textdisplay-with-colors
   Main-Is: textdisplay-with-colors.hs
   Hs-Source-Dirs: src/Examples
   Build-Depends:
-    base == 4.*,
+    base >= 4.14 && < 5,
     fltkhs >= 0.8.0.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
-     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
-  if os(darwin)
-   ghc-Options: "-optl-Wl,-lfltkc"
-  if !os(darwin) && !os(windows)
-    ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
 Executable fltkhs-doublebuffer
   Main-Is: doublebuffer.hs
   Hs-Source-Dirs: src/Examples
   Build-Depends:
-    base == 4.*,
+    base >= 4.14 && < 5,
     fltkhs >= 0.8.0.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
-     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
-  if os(darwin)
-   ghc-Options: "-optl-Wl,-lfltkc"
-  if !os(darwin) && !os(windows)
-    ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
 Executable fltkhs-make-tree
   Main-Is: make-tree.hs
   Hs-Source-Dirs: src/Examples
   Build-Depends:
-    base == 4.*,
+    base >= 4.14 && < 5,
     fltkhs >= 0.8.0.3
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
-     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
-  if os(darwin)
-   ghc-Options: "-optl-Wl,-lfltkc"
-  if !os(darwin) && !os(windows)
-    ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
 Executable fltkhs-tree-simple
   Main-Is: tree-simple.hs
   Hs-Source-Dirs: src/Examples
   Build-Depends:
-    base == 4.*,
+    base >= 4.14 && < 5,
     fltkhs >= 0.8.0.3,
     text >= 1.2.2.0
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
-     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
-  if os(darwin)
-   ghc-Options: "-optl-Wl,-lfltkc"
-  if !os(darwin) && !os(windows)
-    ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
 Executable fltkhs-table-spreadsheet-with-keyboard-nav
   Main-Is: table-spreadsheet-with-keyboard-nav.hs
   Hs-Source-Dirs: src/Examples
   Build-Depends:
-    base == 4.*,
+    base >= 4.14 && < 5,
     fltkhs >= 0.8.0.3,
     text >= 1.2.2.0
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
-     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
-  if os(darwin)
-   ghc-Options: "-optl-Wl,-lfltkc"
-  if !os(darwin) && !os(windows)
-    ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
 Executable fltkhs-table-simple
   Main-Is: table-simple.hs
   Hs-Source-Dirs: src/Examples
   Build-Depends:
-    base == 4.*,
+    base >= 4.14 && < 5,
     fltkhs >= 0.8.0.3,
     text >= 1.2.2.0
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
-     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
-  if os(darwin)
-   ghc-Options: "-optl-Wl,-lfltkc"
-  if !os(darwin) && !os(windows)
-    ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
 Executable fltkhs-table-sort
   Main-Is: table-sort.hs
   Hs-Source-Dirs: src/Examples
   Build-Depends:
-    base == 4.*,
+    base >= 4.14 && < 5,
     fltkhs >= 0.8.0.3,
     text >= 1.2.2.0,
     process
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
-     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
-  if os(darwin)
-   ghc-Options: "-optl-Wl,-lfltkc"
-  if !os(darwin) && !os(windows)
-    ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
 Executable fltkhs-arc
   Main-Is: arc.hs
   Hs-Source-Dirs: src/Examples
   Build-Depends:
-    base == 4.*,
+    base >= 4.14 && < 5,
     fltkhs >= 0.8.0.3,
     text >= 1.2.2.0
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
-     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
-  if os(darwin)
-   ghc-Options: "-optl-Wl,-lfltkc"
-  if !os(darwin) && !os(windows)
-    ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
 Executable fltkhs-bitmap
   Main-Is: bitmap.hs
   Hs-Source-Dirs: src/Examples
   Build-Depends:
-     base == 4.*,
+     base >= 4.14 && < 5,
      fltkhs >= 0.8.0.3,
      bytestring
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
-     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
-  if os(darwin)
-   ghc-Options: "-optl-Wl,-lfltkc"
-  if !os(darwin) && !os(windows)
-    ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
 Executable fltkhs-boxtype
   Main-Is: boxtype.hs
   Hs-Source-Dirs: src/Examples
   Build-Depends:
-     base == 4.*,
+     base >= 4.14 && < 5,
      fltkhs >= 0.8.0.3,
      bytestring,
      text >= 1.2.2.0
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
-     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
-  if os(darwin)
-   ghc-Options: "-optl-Wl,-lfltkc"
-  if !os(darwin) && !os(windows)
-    ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
 Executable fltkhs-browser
   Main-Is: browser.hs
   Hs-Source-Dirs: src/Examples
   Build-Depends:
-     base == 4.*,
+     base >= 4.14 && < 5,
      fltkhs >= 0.8.0.3,
      bytestring,
      text >= 1.2.2.0
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
-     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
-  if os(darwin)
-   ghc-Options: "-optl-Wl,-lfltkc"
-  if !os(darwin) && !os(windows)
-    ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
 Executable fltkhs-clock
   Main-Is: clock.hs
   Hs-Source-Dirs: src/Examples
   Build-Depends:
-     base == 4.*,
+     base >= 4.14 && < 5,
      fltkhs >= 0.8.0.3,
      bytestring
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
-     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-     ghc-Options: -optl-mwindows
-     ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
-  if os(darwin)
-   ghc-Options: "-optl-Wl,-lfltkc"
-  if !os(darwin) && !os(windows)
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
 Executable fltkhs-fd-example
   Main-Is: fd-example.hs
@@ -379,38 +208,20 @@ Executable fltkhs-fd-example
   C-Sources:
     src/Examples/PopenShim.c
   Build-Depends:
-     base == 4.*,
+     base >= 4.14 && < 5,
      fltkhs >= 0.8.0.3,
      process >= 1.2.1.0,
      bytestring,
      text >= 1.2.2.0
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
-     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
-  if os(darwin)
-   ghc-Options: "-optl-Wl,-lfltkc"
-  if !os(darwin) && !os(windows)
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
 Executable fltkhs-howto-drag-and-drop
   Main-Is: howto-drag-and-drop.hs
   Hs-Source-Dirs: src/Examples
   Build-Depends:
-     base == 4.*,
+     base >= 4.14 && < 5,
      fltkhs >= 0.8.0.3,
      text >= 1.2.2.0
   default-language: Haskell2010
   ghc-Options: -Wall -threaded
-  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
-     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
-  if os(windows)
-   ghc-Options: -optl-mwindows
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
-  if os(darwin)
-   ghc-Options: "-optl-Wl,-lfltkc"
-  if !os(darwin) && !os(windows)
-   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"

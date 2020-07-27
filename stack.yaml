@@ -1,6 +1,5 @@
 flags: {}
-packages:
-- '.'
-resolver: lts-15.0
+resolver: nightly-2020-07-23
 extra-deps:
-- fltkhs-0.8.0.3
+- git: git@github.com:deech/fltkhs
+  commit: dcc66a50905ecccc63e91b44554f2afbea1cf5b1
